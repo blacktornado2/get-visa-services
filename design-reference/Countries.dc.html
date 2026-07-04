@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; color: #1a2540; background: #F8F6F1; }
+    .country-card { cursor: pointer; transition: box-shadow 0.3s; }
+    .country-card:hover { box-shadow: 0 16px 48px rgba(11,31,58,0.22); }
+    .country-card img.bg-img { transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .country-card:hover img.bg-img { transform: scale(1.08); }
+    .filter-btn { border: 1.5px solid #e8e4da; background: #fff; border-radius: 100px; padding: 8px 20px; font-size: 13px; font-weight: 600; color: #5a6580; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.15s; white-space: nowrap; }
+    .filter-btn:hover { border-color: #C9A84C; color: #C9A84C; }
+    .filter-btn.active { background: #0B1F3A; border-color: #0B1F3A; color: #fff; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(11,31,58,0.6); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 32px; backdrop-filter: blur(4px); }
+    .modal { background: #fff; border-radius: 24px; max-width: 680px; width: 100%; max-height: 90vh; overflow-y: auto; }
+    input[type="search"]::-webkit-search-cancel-button { display: none; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  </style>
+
+  <style id="gvs-theme-css">
+    section, nav, footer, div, h1, h2, h3, h4, p, a, input, select, button, span { transition: background 0.35s, color 0.35s, border-color 0.35s; }
+    [data-theme="light"] body { background: #FDF6F0 !important; color: #1a0a0f !important; }
+    [data-theme="dark"]  body { background: #12121f !important; color: #fff !important; }
+    [data-theme="light"] nav { background: rgba(255,255,255,0.97) !important; border-bottom-color: rgba(61,26,36,0.12) !important; }
+    [data-theme="dark"]  nav { background: rgba(13,13,26,0.97) !important; border-bottom-color: rgba(184,115,51,0.2) !important; }
+    [data-theme="light"] .gvs-logo-box { background: linear-gradient(135deg,#3D1A24,#6b2d3e) !important; }
+    [data-theme="dark"]  .gvs-logo-box { background: linear-gradient(135deg,#B87333,#d4905a) !important; }
+    [data-theme="light"] .gvs-logo-box span { color: #D4A96A !important; }
+    [data-theme="dark"]  .gvs-logo-box span { color: #0D0D1A !important; }
+    [data-theme="light"] .gvs-logo-name { color: #3D1A24 !important; }
+    [data-theme="dark"]  .gvs-logo-name { color: #fff !important; }
+    [data-theme="light"] .gvs-logo-sub  { color: #9b4a5a !important; }
+    [data-theme="dark"]  .gvs-logo-sub  { color: #B87333 !important; }
+    [data-theme="light"] .gvs-navlink   { color: #3a3030 !important; opacity: 1 !important; }
+    [data-theme="dark"]  .gvs-navlink   { color: rgba(255,255,255,0.8) !important; }
+    [data-theme="light"] .gvs-nav-cta   { background: linear-gradient(135deg,#3D1A24,#6b2d3e) !important; color: #D4A96A !important; }
+    [data-theme="dark"]  .gvs-nav-cta   { background: linear-gradient(135deg,#B87333,#d4905a) !important; color: #0D0D1A !important; }
+    .theme-toggle { display:flex;align-items:center;gap:6px;background:transparent;border:1.5px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 14px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,0.85);white-space:nowrap; }
+    [data-theme="light"] .theme-toggle { border-color:rgba(61,26,36,0.2);color:#3D1A24; }
+    .theme-toggle:hover { opacity:0.8; }
+    [data-theme="light"] [data-bg="white"]  { background: #FDF6F0 !important; }
+    [data-theme="dark"]  [data-bg="white"]  { background: #12121f !important; }
+    [data-theme="light"] [data-bg="cream"]  { background: #fff !important; }
+    [data-theme="dark"]  [data-bg="cream"]  { background: #1a1a2e !important; }
+    [data-theme="light"] [data-bg="dark"]   { background: linear-gradient(135deg,#3D1A24,#6b2d3e) !important; }
+    [data-theme="dark"]  [data-bg="dark"]   { background: linear-gradient(135deg,#0D0D1A,#1a1a3e) !important; }
+    [data-theme="light"] [data-bg="cta"]    { background: linear-gradient(135deg,#D4A96A,#e8c285) !important; }
+    [data-theme="dark"]  [data-bg="cta"]    { background: linear-gradient(135deg,#B87333,#d4905a) !important; }
+    [data-theme="light"] [data-bg="white"] h2,[data-theme="light"] [data-bg="white"] h3,[data-theme="light"] [data-bg="white"] h4,
+    [data-theme="light"] [data-bg="cream"] h2,[data-theme="light"] [data-bg="cream"] h3,[data-theme="light"] [data-bg="cream"] h4 { color: #1a0a0f !important; }
+    [data-theme="dark"]  [data-bg="white"] h2,[data-theme="dark"]  [data-bg="white"] h3,[data-theme="dark"]  [data-bg="white"] h4,
+    [data-theme="dark"]  [data-bg="cream"] h2,[data-theme="dark"]  [data-bg="cream"] h3,[data-theme="dark"]  [data-bg="cream"] h4 { color: #fff !important; }
+    [data-theme="light"] [data-bg="white"] p,[data-theme="light"] [data-bg="cream"] p { color: #5a3a3a !important; }
+    [data-theme="dark"]  [data-bg="white"] p,[data-theme="dark"]  [data-bg="cream"] p { color: rgba(255,255,255,0.65) !important; }
+    [data-theme="light"] [data-bg="cta"] h2 { color: #3D1A24 !important; }
+    [data-theme="light"] [data-bg="cta"] p  { color: rgba(61,26,36,0.7) !important; }
+    [data-theme="dark"]  [data-bg="cta"] h2 { color: #0D0D1A !important; }
+    [data-theme="dark"]  [data-bg="cta"] p  { color: rgba(13,13,26,0.7) !important; }
+    [data-theme="light"] footer { background: #3D1A24 !important; }
+    [data-theme="dark"]  footer { background: #0D0D1A !important; }
+    [data-theme="light"] .gvs-accent { color: #D4A96A !important; }
+    [data-theme="dark"]  .gvs-accent { color: #B87333 !important; }
+    [data-theme="light"] .gvs-navy   { color: #3D1A24 !important; }
+    [data-theme="dark"]  .gvs-navy   { color: #fff !important; }
+    [data-theme="light"] .gvs-btn-navy { background: #3D1A24 !important; }
+    [data-theme="dark"]  .gvs-btn-navy { background: #0D0D1A !important; }
+    [data-theme="light"] .gvs-btn-gold { background: linear-gradient(135deg,#D4A96A,#e8c285) !important; color: #3D1A24 !important; }
+    [data-theme="dark"]  .gvs-btn-gold { background: linear-gradient(135deg,#B87333,#d4905a) !important; color: #0D0D1A !important; }
+    [data-theme="light"] input, [data-theme="light"] select, [data-theme="light"] textarea { background: #fff !important; border-color: #e8d8cc !important; color: #1a0a0f !important; }
+    [data-theme="dark"]  input, [data-theme="dark"]  select, [data-theme="dark"]  textarea { background: rgba(255,255,255,0.07) !important; border-color: rgba(184,115,51,0.2) !important; color: #fff !important; }
+  </style>
+  <script>
+    (function(){var t=localStorage.getItem('gvs-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+</helmet>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,31,58,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:68px;">
+    <a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <div class="gvs-logo-box" style="width:38px;height:38px;background:linear-gradient(135deg,#C9A84C,#e8c96a);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:#0B1F3A;">G</span>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:#fff;" class="gvs-logo-name">GVS</div>
+        <div style="font-size:9px;color:#C9A84C;letter-spacing:1.5px;text-transform:uppercase;margin-top:-2px;" class="gvs-logo-sub">Get Visa Services</div>
+      </div>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="Home.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">Home</a>
+      <a href="Services.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">Services</a>
+      <a href="Countries.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#C9A84C;text-decoration:none;">Countries</a>
+      <a href="About.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">About</a>
+      <a href="Blog.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">Blog</a>
+      <a href="Contact.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">Contact</a>
+      <button class="theme-toggle" onclick="(function(){var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('gvs-theme',t);document.querySelectorAll('.theme-toggle').forEach(function(b){b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';});})()">&#x1F319; Dark</button>
+      <a class="gvs-nav-cta" href="Contact.dc.html" style="background:linear-gradient(135deg,#C9A84C,#e8c96a);color:#0B1F3A;font-size:13px;font-weight:700;padding:10px 22px;border-radius:6px;text-decoration:none;">Get Free Consultation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding:120px 32px 64px;background:linear-gradient(160deg,#0B1F3A 0%,#0f2d56 100%);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 80% 40%, rgba(201,168,76,0.08) 0%, transparent 50%);pointer-events:none;"></div>
+  <div style="position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+      <a href="Home.dc.html" style="font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;">Home</a>
+      <span style="font-size:13px;color:rgba(255,255,255,0.25);">›</span>
+      <span style="font-size:13px;color:#C9A84C;">Countries</span>
+    </div>
+    <div style="max-width:700px;">
+      <h1 style="font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.1;">Tourist Visa by Country</h1>
+      <p style="font-size:17px;color:rgba(255,255,255,0.65);margin-bottom:36px;line-height:1.7;">Find visa requirements, processing times, and fees for 150+ countries. Click any country to get started.</p>
+      <!-- Search -->
+      <div style="position:relative;">
+        <svg style="position:absolute;left:18px;top:50%;transform:translateY(-50%);pointer-events:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="search-input" type="search" placeholder="Search country... e.g. France, Thailand, Japan" style="width:100%;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);border-radius:12px;padding:16px 16px 16px 50px;font-size:15px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;outline:none;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS + GRID -->
+<section style="padding:48px 32px 80px;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <!-- Region filters -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px;" id="filter-bar">
+      <button class="filter-btn active" data-region="all">All Countries</button>
+      <button class="filter-btn" data-region="europe">🌍 Europe / Schengen</button>
+      <button class="filter-btn" data-region="americas">🌎 Americas</button>
+      <button class="filter-btn" data-region="asia">🌏 Asia Pacific</button>
+      <button class="filter-btn" data-region="middleeast">🕌 Middle East</button>
+      <button class="filter-btn" data-region="africa">🌍 Africa</button>
+      <button class="filter-btn" data-region="evisa">⚡ e-Visa Available</button>
+    </div>
+
+    <!-- Result count -->
+    <div style="margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;">
+      <div id="result-count" style="font-size:14px;color:#8a8980;"></div>
+      <div style="font-size:13px;color:#8a8980;">Click a country card to apply</div>
+    </div>
+
+    <!-- Country grid -->
+    <div id="country-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;"></div>
+
+    <!-- No results -->
+    <div id="no-results" style="display:none;text-align:center;padding:80px 32px;">
+      <div style="font-size:48px;margin-bottom:16px;">🔍</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:#0B1F3A;margin-bottom:8px;">No countries found</div>
+      <div style="font-size:14px;color:#8a8980;">Try a different search term or region filter</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" style="display:none;" class="modal-overlay" onClick="{{ closeModalBg }}">
+  <div class="modal" id="modal-content" onClick="{{ stopProp }}">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,#0B1F3A,#0f2d56);padding:80px 32px;">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:#fff;margin-bottom:14px;">Don't see your country?</h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:36px;line-height:1.7;">We cover 150+ countries. Contact us and our experts will guide you through the specific requirements for your destination.</p>
+    <a href="Contact.dc.html" style="display:inline-block;background:linear-gradient(135deg,#C9A84C,#e8c96a);color:#0B1F3A;font-size:15px;font-weight:700;padding:16px 36px;border-radius:8px;text-decoration:none;">Contact Our Experts →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<a href="https://wa.me/911234567890" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" style="position:fixed;bottom:28px;right:28px;z-index:200;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,0.45);text-decoration:none;">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<footer style="background:#0B1F3A;padding:40px 32px 28px;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:24px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:36px;height:36px;background:linear-gradient(135deg,#C9A84C,#e8c96a);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:#0B1F3A;">G</span>
+      </div>
+      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:#fff;">GVS — Get Visa Services</div>
+    </div>
+    <div style="display:flex;gap:24px;">
+      <a href="Home.dc.html" style="font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;">Home</a>
+      <a href="Services.dc.html" style="font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;">Services</a>
+      <a href="Contact.dc.html" style="font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;">Contact</a>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;text-align:center;">
+    <div style="font-size:12px;color:rgba(255,255,255,0.25);">© 2025 GVS - Get Visa Services. All rights reserved.</div>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { activeRegion: 'all', search: '', modalCountry: null };
+
+  // Production Unsplash URLs — correct landmark photos, work on live site.
+  // Preview sandbox blocks images.unsplash.com; picsum seeds used as stand-ins below.
+  unsplashMap = {
+    'France':           'https://images.unsplash.com/photo-1543349689-9a4d426bee8e?w=600&h=300&fit=crop',
+    'Germany':          'https://images.unsplash.com/photo-1467269204165-b537a9e29bda?w=600&h=300&fit=crop',
+    'Italy':            'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&h=300&fit=crop',
+    'Spain':            'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&h=300&fit=crop',
+    'Netherlands':      'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?w=600&h=300&fit=crop',
+    'Greece':           'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&h=300&fit=crop',
+    'Switzerland':      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=300&fit=crop',
+    'UK':               'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&h=300&fit=crop',
+    'Portugal':         'https://images.unsplash.com/photo-1555881400-74d7acaacd2b?w=600&h=300&fit=crop',
+    'USA':              'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&h=300&fit=crop',
+    'Canada':           'https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?w=600&h=300&fit=crop',
+    'Mexico':           'https://images.unsplash.com/photo-1518638150340-f706e86654de?w=600&h=300&fit=crop',
+    'Brazil':           'https://images.unsplash.com/photo-1483729000021-edd2adfc5d04?w=600&h=300&fit=crop',
+    'Argentina':        'https://images.unsplash.com/photo-1589909202802-8f4aab88b483?w=600&h=300&fit=crop',
+    'Thailand':         'https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&h=300&fit=crop',
+    'Japan':            'https://images.unsplash.com/photo-1480796927426-f609979314bd?w=600&h=300&fit=crop',
+    'Australia':        'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600&h=300&fit=crop',
+    'Singapore':        'https://images.unsplash.com/photo-1525625293517-5a3ec6f5e5ab?w=600&h=300&fit=crop',
+    'Bali / Indonesia': 'https://images.unsplash.com/photo-1537996134526-8aed29c52a25?w=600&h=300&fit=crop',
+    'Vietnam':          'https://images.unsplash.com/photo-1528127269322-539801943592?w=600&h=300&fit=crop',
+    'Malaysia':         'https://images.unsplash.com/photo-1596422405755-7c56e6f9f8c9?w=600&h=300&fit=crop',
+    'South Korea':      'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&h=300&fit=crop',
+    'New Zealand':      'https://images.unsplash.com/photo-1469854523086-cc02b8039806?w=600&h=300&fit=crop',
+    'Sri Lanka':        'https://images.unsplash.com/photo-1588258219511-64bd4e290e12?w=600&h=300&fit=crop',
+    'Nepal':            'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&h=300&fit=crop',
+    'Philippines':      'https://images.unsplash.com/photo-1559628129-26cd88e28ef9?w=600&h=300&fit=crop',
+    'UAE (Dubai)':      'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&h=300&fit=crop',
+    'Saudi Arabia':     'https://images.unsplash.com/photo-1586724237568-deca1b98a37d?w=600&h=300&fit=crop',
+    'Qatar':            'https://images.unsplash.com/photo-1577948000111-3724a5c7edca?w=600&h=300&fit=crop',
+    'Oman':             'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=600&h=300&fit=crop',
+    'Jordan':           'https://images.unsplash.com/photo-1539650116574-75c0c6d2d3b7?w=600&h=300&fit=crop',
+    'Bahrain':          'https://images.unsplash.com/photo-1578895101408-1a36b338a4c0?w=600&h=300&fit=crop',
+    'Kenya':            'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&h=300&fit=crop',
+    'Tanzania':         'https://images.unsplash.com/photo-1516026672322-5f7e01b4a6ef?w=600&h=300&fit=crop',
+    'South Africa':     'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=600&h=300&fit=crop',
+    'Morocco':          'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&h=300&fit=crop',
+    'Egypt':            'https://images.unsplash.com/photo-1568495366734-f9c4f32e4745?w=600&h=300&fit=crop',
+    'Maldives':         'https://images.unsplash.com/photo-1514282401047-065cf9d8e28d?w=600&h=300&fit=crop',
+    'Mauritius':        'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=600&h=300&fit=crop',
+  };
+
+  // Picsum seeds used only in this design preview (sandbox blocks Unsplash).
+  // Replace with unsplashMap values when deploying to production.
+  imgMap = {
+    'France':           'https://picsum.photos/seed/france-eiffel/600/300',
+    'Germany':          'https://picsum.photos/seed/germany-berlin/600/300',
+    'Italy':            'https://picsum.photos/seed/italy-rome/600/300',
+    'Spain':            'https://picsum.photos/seed/spain-barcelona/600/300',
+    'Netherlands':      'https://picsum.photos/seed/amsterdam-canal/600/300',
+    'Greece':           'https://picsum.photos/seed/greece-santorini/600/300',
+    'Switzerland':      'https://picsum.photos/seed/swiss-alps/600/300',
+    'UK':               'https://picsum.photos/seed/london-bigben/600/300',
+    'Portugal':         'https://picsum.photos/seed/lisbon-portugal/600/300',
+    'USA':              'https://picsum.photos/seed/newyork-manhattan/600/300',
+    'Canada':           'https://picsum.photos/seed/banff-canada/600/300',
+    'Mexico':           'https://picsum.photos/seed/mexico-itza/600/300',
+    'Brazil':           'https://picsum.photos/seed/rio-brazil/600/300',
+    'Argentina':        'https://picsum.photos/seed/buenos-aires/600/300',
+    'Thailand':         'https://picsum.photos/seed/bangkok-temple/600/300',
+    'Japan':            'https://picsum.photos/seed/japan-fuji/600/300',
+    'Australia':        'https://picsum.photos/seed/sydney-opera/600/300',
+    'Singapore':        'https://picsum.photos/seed/marinabay-singapore/600/300',
+    'Bali / Indonesia': 'https://picsum.photos/seed/bali-temple/600/300',
+    'Vietnam':          'https://picsum.photos/seed/halong-vietnam/600/300',
+    'Malaysia':         'https://picsum.photos/seed/kuala-towers/600/300',
+    'South Korea':      'https://picsum.photos/seed/seoul-korea/600/300',
+    'New Zealand':      'https://picsum.photos/seed/nz-fiord/600/300',
+    'Sri Lanka':        'https://picsum.photos/seed/srilanka-temple/600/300',
+    'Nepal':            'https://picsum.photos/seed/nepal-everest/600/300',
+    'Philippines':      'https://picsum.photos/seed/elnido-phil/600/300',
+    'UAE (Dubai)':      'https://picsum.photos/seed/dubai-burj/600/300',
+    'Saudi Arabia':     'https://picsum.photos/seed/saudi-riyadh/600/300',
+    'Qatar':            'https://picsum.photos/seed/doha-qatar/600/300',
+    'Oman':             'https://picsum.photos/seed/oman-muscat/600/300',
+    'Jordan':           'https://picsum.photos/seed/petra-jordan/600/300',
+    'Bahrain':          'https://picsum.photos/seed/bahrain-city/600/300',
+    'Kenya':            'https://picsum.photos/seed/kenya-safari/600/300',
+    'Tanzania':         'https://picsum.photos/seed/kili-tanzania/600/300',
+    'South Africa':     'https://picsum.photos/seed/capetown-sa/600/300',
+    'Morocco':          'https://picsum.photos/seed/marrakech-morocco/600/300',
+    'Egypt':            'https://picsum.photos/seed/pyramids-egypt/600/300',
+    'Maldives':         'https://picsum.photos/seed/maldives-beach/600/300',
+    'Mauritius':        'https://picsum.photos/seed/mauritius-isle/600/300',
+  };
+
+  codeMap = {
+    'France':'fr','Germany':'de','Italy':'it','Spain':'es','Netherlands':'nl',
+    'Greece':'gr','Switzerland':'ch','UK':'gb','Portugal':'pt','USA':'us',
+    'Canada':'ca','Mexico':'mx','Brazil':'br','Argentina':'ar','Thailand':'th',
+    'Japan':'jp','Australia':'au','Singapore':'sg','Bali / Indonesia':'id',
+    'Vietnam':'vn','Malaysia':'my','South Korea':'kr','New Zealand':'nz',
+    'Sri Lanka':'lk','Nepal':'np','Philippines':'ph','UAE (Dubai)':'ae',
+    'Saudi Arabia':'sa','Qatar':'qa','Oman':'om','Jordan':'jo','Bahrain':'bh',
+    'Kenya':'ke','Tanzania':'tz','South Africa':'za','Morocco':'ma',
+    'Egypt':'eg','Maldives':'mv','Mauritius':'mu',
+  };
+
+  countries = [
+    // Europe / Schengen
+    { name: 'France', flag: '🇫🇷', region: 'europe', type: 'Schengen Visa', entry: 'Single / Multiple', processing: '10–15 days', fee: '₹8,500', evisa: false, difficulty: 'Moderate', popular: true, notes: 'Bank statements for last 3 months required. Cover letter recommended.' },
+    { name: 'Germany', flag: '🇩🇪', region: 'europe', type: 'Schengen Visa', entry: 'Single / Multiple', processing: '10–15 days', fee: '₹8,500', evisa: false, difficulty: 'Moderate', popular: true, notes: 'Strong financial proof required. Purpose of visit must be clearly stated.' },
+    { name: 'Italy', flag: '🇮🇹', region: 'europe', type: 'Schengen Visa', entry: 'Single / Multiple', processing: '10–15 days', fee: '₹8,500', evisa: false, difficulty: 'Moderate', popular: true, notes: 'Hotel bookings and travel itinerary mandatory.' },
+    { name: 'Spain', flag: '🇪🇸', region: 'europe', type: 'Schengen Visa', entry: 'Single / Multiple', processing: '10–15 days', fee: '₹8,500', evisa: false, difficulty: 'Moderate', popular: false, notes: 'Travel insurance minimum €30,000 required.' },
+    { name: 'Netherlands', flag: '🇳🇱', region: 'europe', type: 'Schengen Visa', entry: 'Single / Multiple', processing: '10–15 days', fee: '₹8,500', evisa: false, difficulty: 'Moderate', popular: false, notes: 'Apply at least 3 weeks in advance.' },
+    { name: 'Greece', flag: '🇬🇷', region: 'europe', type: 'Schengen Visa', entry: 'Single / Multiple', processing: '8–12 days', fee: '₹8,500', evisa: false, difficulty: 'Easy', popular: false, notes: 'One of the more straightforward Schengen applications.' },
+    { name: 'Switzerland', flag: '🇨🇭', region: 'europe', type: 'Schengen Visa', entry: 'Single / Multiple', processing: '10–15 days', fee: '₹9,200', evisa: false, difficulty: 'Moderate', popular: false, notes: 'Not EU but part of Schengen. Higher funds proof needed.' },
+    { name: 'UK', flag: '🇬🇧', region: 'europe', type: 'Standard Visitor Visa', entry: 'Multiple', processing: '15–21 days', fee: '₹14,000', evisa: false, difficulty: 'Moderate', popular: true, notes: 'Strong ties to home country required. Financial proof essential.' },
+    { name: 'Portugal', flag: '🇵🇹', region: 'europe', type: 'Schengen Visa', entry: 'Single / Multiple', processing: '10–15 days', fee: '₹8,500', evisa: false, difficulty: 'Easy', popular: false, notes: 'High approval rate. Straightforward documentation.' },
+    // Americas
+    { name: 'USA', flag: '🇺🇸', region: 'americas', type: 'B-2 Tourist Visa', entry: 'Multiple', processing: '4–8 weeks', fee: '₹14,000', evisa: false, difficulty: 'Hard', popular: true, notes: 'Interview at US consulate required. Strong ties to India must be demonstrated.' },
+    { name: 'Canada', flag: '🇨🇦', region: 'americas', type: 'Visitor Visa (TRV)', entry: 'Multiple', processing: '2–8 weeks', fee: '₹11,500', evisa: false, difficulty: 'Moderate', popular: true, notes: 'Biometrics required. Apply well in advance.' },
+    { name: 'Mexico', flag: '🇲🇽', region: 'americas', type: 'Tourist Card (FMM)', entry: 'Single', processing: 'On arrival', fee: '₹1,200', evisa: true, difficulty: 'Easy', popular: false, notes: 'Visa-free for Indian passport holders with valid US visa.' },
+    { name: 'Brazil', flag: '🇧🇷', region: 'americas', type: 'Tourist Visa', entry: 'Single', processing: '5–10 days', fee: '₹7,500', evisa: true, difficulty: 'Easy', popular: false, notes: 'e-Visa available online. Processing within 72 hours usually.' },
+    { name: 'Argentina', flag: '🇦🇷', region: 'americas', type: 'Tourist Visa', entry: 'Single', processing: '5–10 days', fee: '₹5,500', evisa: false, difficulty: 'Moderate', popular: false, notes: 'Apply at Argentine consulate in your city.' },
+    // Asia Pacific
+    { name: 'Thailand', flag: '🇹🇭', region: 'asia', type: 'Tourist Visa (TR)', entry: 'Single', processing: '3–5 days', fee: '₹3,500', evisa: true, difficulty: 'Easy', popular: true, notes: 'Visa on arrival also available for 30 days. e-Visa recommended for longer stays.' },
+    { name: 'Japan', flag: '🇯🇵', region: 'asia', type: 'Tourist Visa', entry: 'Single / Multiple', processing: '5–7 days', fee: '₹5,500', evisa: false, difficulty: 'Moderate', popular: true, notes: 'Requires invitation or travel agency itinerary. Detailed documents needed.' },
+    { name: 'Australia', flag: '🇦🇺', region: 'asia', type: 'Visitor Visa (600)', entry: 'Multiple', processing: '15–30 days', fee: '₹16,000', evisa: false, difficulty: 'Moderate', popular: true, notes: 'Online application. Health insurance and financial proof needed.' },
+    { name: 'Singapore', flag: '🇸🇬', region: 'asia', type: 'Tourist Visa', entry: 'Single / Multiple', processing: '3–5 days', fee: '₹3,200', evisa: true, difficulty: 'Easy', popular: true, notes: 'e-Visa available. Very high approval rate for Indian tourists.' },
+    { name: 'Bali / Indonesia', flag: '🇮🇩', region: 'asia', type: 'Visa on Arrival', entry: 'Single', processing: 'On arrival', fee: '₹3,000', evisa: true, difficulty: 'Easy', popular: true, notes: 'Visa on arrival at major airports. Also available as e-Visa.' },
+    { name: 'Vietnam', flag: '🇻🇳', region: 'asia', type: 'e-Visa', entry: 'Single', processing: '3 days', fee: '₹2,200', evisa: true, difficulty: 'Easy', popular: true, notes: 'e-Visa fully online. Valid 90 days. Very straightforward process.' },
+    { name: 'Malaysia', flag: '🇲🇾', region: 'asia', type: 'eNTRI / Visa', entry: 'Single', processing: '1–3 days', fee: '₹2,800', evisa: true, difficulty: 'Easy', popular: false, notes: 'eNTRI available for Indian passport holders. 30-day stay.' },
+    { name: 'South Korea', flag: '🇰🇷', region: 'asia', type: 'Tourist Visa (C-3)', entry: 'Single / Multiple', processing: '5–7 days', fee: '₹6,500', evisa: false, difficulty: 'Moderate', popular: false, notes: 'K-ETA digital travel authorization available for some nationalities.' },
+    { name: 'New Zealand', flag: '🇳🇿', region: 'asia', type: 'Visitor Visa', entry: 'Single', processing: '20–30 days', fee: '₹14,500', evisa: false, difficulty: 'Moderate', popular: false, notes: 'NZeTA for transit only. Full visitor visa required for Indian passport.' },
+    { name: 'Sri Lanka', flag: '🇱🇰', region: 'asia', type: 'ETA', entry: 'Single', processing: 'Instant', fee: '₹2,000', evisa: true, difficulty: 'Easy', popular: false, notes: 'Online ETA within hours. 30-day stay. Very easy process.' },
+    { name: 'Nepal', flag: '🇳🇵', region: 'asia', type: 'Visa on Arrival', entry: 'Single', processing: 'On arrival', fee: 'Free', evisa: true, difficulty: 'Easy', popular: false, notes: 'Free visa on arrival for Indian passport holders. No application needed.' },
+    { name: 'Philippines', flag: '🇵🇭', region: 'asia', type: 'Visa on Arrival', entry: 'Single', processing: 'On arrival', fee: 'Free', evisa: true, difficulty: 'Easy', popular: false, notes: 'Visa on arrival for Indian passport, up to 30 days.' },
+    // Middle East
+    { name: 'UAE (Dubai)', flag: '🇦🇪', region: 'middleeast', type: 'Tourist Visa', entry: 'Single / Multiple', processing: '2–4 days', fee: '₹7,500', evisa: true, difficulty: 'Easy', popular: true, notes: 'e-Visa available. 30-day and 90-day options. Very high approval.' },
+    { name: 'Saudi Arabia', flag: '🇸🇦', region: 'middleeast', type: 'Tourist e-Visa', entry: 'Multiple', processing: '24–72 hrs', fee: '₹6,800', evisa: true, difficulty: 'Easy', popular: false, notes: 'Online e-Visa. Valid 1 year, multiple entry, 90 days per visit.' },
+    { name: 'Qatar', flag: '🇶🇦', region: 'middleeast', type: 'Tourist Visa', entry: 'Single', processing: '2–3 days', fee: '₹5,200', evisa: true, difficulty: 'Easy', popular: false, notes: 'Visa on arrival available. e-Visa recommended for advance planning.' },
+    { name: 'Oman', flag: '🇴🇲', region: 'middleeast', type: 'Tourist e-Visa', entry: 'Single', processing: '24–48 hrs', fee: '₹4,800', evisa: true, difficulty: 'Easy', popular: false, notes: 'e-Visa online. 30-day visit visa. Quick processing.' },
+    { name: 'Jordan', flag: '🇯🇴', region: 'middleeast', type: 'Visa on Arrival', entry: 'Single', processing: 'On arrival', fee: '₹4,000', evisa: true, difficulty: 'Easy', popular: false, notes: 'Visa on arrival available. Jordan Pass recommended for tourists.' },
+    { name: 'Bahrain', flag: '🇧🇭', region: 'middleeast', type: 'Tourist e-Visa', entry: 'Single', processing: 'Instant–24 hrs', fee: '₹3,800', evisa: true, difficulty: 'Easy', popular: false, notes: 'e-Visa online. Very quick approval. Up to 14 days stay.' },
+    // Africa
+    { name: 'Kenya', flag: '🇰🇪', region: 'africa', type: 'e-Visa', entry: 'Single', processing: '3–5 days', fee: '₹4,200', evisa: true, difficulty: 'Easy', popular: false, notes: 'e-Visa mandatory since 2023. Apply at evisa.go.ke.' },
+    { name: 'Tanzania', flag: '🇹🇿', region: 'africa', type: 'Tourist Visa', entry: 'Single', processing: '2–5 days', fee: '₹4,800', evisa: true, difficulty: 'Easy', popular: false, notes: 'e-Visa available. Visa on arrival also possible at major ports.' },
+    { name: 'South Africa', flag: '🇿🇦', region: 'africa', type: 'Tourist Visa', entry: 'Single', processing: '10–15 days', fee: '₹7,000', evisa: false, difficulty: 'Moderate', popular: false, notes: 'Apply at VFS centre. Biometrics required.' },
+    { name: 'Morocco', flag: '🇲🇦', region: 'africa', type: 'Tourist Visa', entry: 'Single', processing: '5–10 days', fee: '₹4,500', evisa: false, difficulty: 'Moderate', popular: false, notes: 'Apply at Moroccan consulate. Itinerary and hotel bookings required.' },
+    { name: 'Egypt', flag: '🇪🇬', region: 'africa', type: 'Tourist e-Visa', entry: 'Single', processing: '3–5 days', fee: '₹3,500', evisa: true, difficulty: 'Easy', popular: false, notes: 'e-Visa online. Visa on arrival also available at Cairo airport.' },
+    { name: 'Maldives', flag: '🇲🇻', region: 'asia', type: 'Visa on Arrival', entry: 'Single', processing: 'On arrival', fee: 'Free', evisa: true, difficulty: 'Easy', popular: true, notes: 'Free 30-day visa on arrival for all nationalities. No application needed.' },
+    { name: 'Mauritius', flag: '🇲🇺', region: 'africa', type: 'Visa on Arrival', entry: 'Single', processing: 'On arrival', fee: 'Free', evisa: true, difficulty: 'Easy', popular: false, notes: 'Free visa on arrival for Indian passport holders. Up to 90 days.' },
+  ];
+
+  classifyElements() {
+    const t = document.documentElement.getAttribute('data-theme') || 'dark';
+    document.querySelectorAll('.theme-toggle').forEach(b => { b.textContent = t === 'dark' ? '☀️ Light' : '🌙 Dark'; });
+    document.querySelectorAll('section').forEach(el => {
+      if (el.hasAttribute('data-bg')) return;
+      const s = el.getAttribute('style') || '';
+      if (s.includes('#F8F6F1') || s.includes('rgb(248, 246, 241)')) el.setAttribute('data-bg', 'cream');
+      else if ((s.includes('background:#fff') || s.includes('background: #fff') || s.includes('background: rgb(255, 255, 255)')) && !s.includes('gradient')) el.setAttribute('data-bg', 'white');
+      else if ((s.includes('#0B1F3A') || s.includes('rgb(11, 31, 58)')) && s.includes('gradient')) el.setAttribute('data-bg', 'dark');
+      else if ((s.includes('#C9A84C') || s.includes('rgb(201, 168, 76)')) && s.includes('gradient')) el.setAttribute('data-bg', 'cta');
+    });
+    document.querySelectorAll('[style]').forEach(el => {
+      const s = el.getAttribute('style') || '';
+      const tag = el.tagName;
+      const inDark = el.closest('[data-bg="dark"]') || el.closest('footer');
+      if (!inDark) {
+        if ((s.includes('color:#C9A84C') || s.includes('color: rgb(201, 168, 76)')) && !el.classList.contains('gvs-accent')) el.classList.add('gvs-accent');
+        if ((s.includes('color:#0B1F3A') || s.includes('color: rgb(11, 31, 58)')) && !el.classList.contains('gvs-navy')) el.classList.add('gvs-navy');
+      }
+      if ((tag==='A'||tag==='BUTTON') && (s.includes('background:#0B1F3A') || s.includes('background: rgb(11, 31, 58)')) && !el.classList.contains('gvs-btn-navy')) el.classList.add('gvs-btn-navy');
+      if ((tag==='A'||tag==='BUTTON') && (s.includes('background:linear-gradient(135deg,#C9A84C') || s.includes('linear-gradient(135deg, rgb(201, 168, 76)')) && !el.classList.contains('gvs-btn-gold')) el.classList.add('gvs-btn-gold');
+    });
+  }
+
+  componentDidMount() {
+    this.classifyElements();
+    this.renderGrid();
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      this.setState({ search: e.target.value });
+      this.renderGrid();
+    });
+    document.getElementById('filter-bar').addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-region]');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      this.setState({ activeRegion: btn.dataset.region });
+      this.renderGrid();
+    });
+  }
+
+  componentDidUpdate() { this.renderGrid(); }
+
+  getFiltered() {
+    const { activeRegion, search } = this.state;
+    return this.countries.filter(c => {
+      const matchRegion = activeRegion === 'all' ? true
+        : activeRegion === 'evisa' ? c.evisa
+        : c.region === activeRegion;
+      const matchSearch = !search || c.name.toLowerCase().includes(search.toLowerCase());
+      return matchRegion && matchSearch;
+    });
+  }
+
+  getVisaByDate(processing) {
+    const today = new Date();
+    let days = 0;
+    if (/on arrival|instant/i.test(processing)) {
+      days = 0;
+    } else if (/(\d+)\s*–\s*(\d+)\s*week/i.test(processing)) {
+      const m = processing.match(/(\d+)\s*–\s*(\d+)\s*week/i);
+      days = parseInt(m[2]) * 7;
+    } else if (/(\d+)\s*week/i.test(processing)) {
+      const m = processing.match(/(\d+)\s*week/i);
+      days = parseInt(m[1]) * 7;
+    } else if (/(\d+)\s*–\s*(\d+)\s*day/i.test(processing)) {
+      const m = processing.match(/(\d+)\s*–\s*(\d+)\s*day/i);
+      days = parseInt(m[2]);
+    } else if (/(\d+)\s*day/i.test(processing)) {
+      const m = processing.match(/(\d+)\s*day/i);
+      days = parseInt(m[1]);
+    } else if (/(\d+)\s*–\s*(\d+)\s*hr/i.test(processing)) {
+      days = 1;
+    } else if (/(\d+)\s*hr/i.test(processing)) {
+      days = 1;
+    }
+    const target = new Date(today);
+    target.setDate(today.getDate() + days);
+    const day = target.getDate();
+    const suffix = day === 1 || day === 21 || day === 31 ? 'st'
+                 : day === 2 || day === 22 ? 'nd'
+                 : day === 3 || day === 23 ? 'rd' : 'th';
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return days === 0 ? 'Today (on arrival)' : `${day}${suffix} ${months[target.getMonth()]}`;
+  }
+
+  difficultyColor(d) {
+    return d === 'Easy' ? '#1F8A5B' : d === 'Moderate' ? '#C9A84C' : '#C94C4C';
+  }
+  difficultyBg(d) {
+    return d === 'Easy' ? 'rgba(31,138,91,0.1)' : d === 'Moderate' ? 'rgba(201,168,76,0.12)' : 'rgba(201,76,76,0.1)';
+  }
+
+  renderGrid() {
+    const filtered = this.getFiltered();
+    const grid = document.getElementById('country-grid');
+    const noResults = document.getElementById('no-results');
+    const countEl = document.getElementById('result-count');
+    if (!grid) return;
+    countEl.textContent = `Showing ${filtered.length} ${filtered.length === 1 ? 'country' : 'countries'}`;
+    if (filtered.length === 0) {
+      grid.style.display = 'none';
+      noResults.style.display = 'block';
+      return;
+    }
+    grid.style.display = 'grid';
+    noResults.style.display = 'none';
+    const fallbackImg = 'https://flagcdn.com/w640/un.png';
+    grid.innerHTML = filtered.map(c => `
+      <div class="country-card" style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(11,31,58,0.15);aspect-ratio:3/4;" onclick="window.__gvsOpenModal('${c.name}')">
+        <!-- Full-card background image -->
+        <img src="${this.unsplashMap[c.name] || this.imgMap[c.name] || fallbackImg}" onerror="this.onerror=null;this.src='${this.imgMap[c.name] || fallbackImg}'" alt="${c.name}" class="bg-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;" />
+        <!-- Dark gradient overlay -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 40%,rgba(0,0,0,0.6) 100%);"></div>
+        <!-- Badges -->
+        ${c.evisa ? `<div style="position:absolute;top:12px;right:12px;background:rgba(31,138,91,0.9);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;letter-spacing:0.5px;backdrop-filter:blur(6px);">⚡ e-Visa</div>` : ''}
+        ${c.popular ? `<div style="position:absolute;top:12px;left:12px;background:rgba(201,168,76,0.95);color:#0B1F3A;font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;letter-spacing:0.5px;">★ Popular</div>` : ''}
+        <!-- Centered round flag -->
+        <div style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;border:3px solid rgba(255,255,255,0.9);box-shadow:0 4px 20px rgba(0,0,0,0.4);overflow:hidden;background:#fff;">
+          <img src="https://flagcdn.com/w160/${this.codeMap[c.name] || 'un'}.png" alt="${c.name} flag" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <!-- Glassmorphism bottom panel -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:18px 18px 16px;background:rgba(255,255,255,0.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,0.18);">
+          <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#fff;margin-bottom:2px;">${c.name}</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.7);margin-bottom:12px;">${c.type}</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;color:rgba(255,255,255,0.65);">Get visa by</span>
+              <span style="font-size:13px;font-weight:700;color:#6ee7a8;">${this.getVisaByDate(c.processing)}</span>
+            </div>
+            <div style="height:1px;background:rgba(255,255,255,0.15);"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;color:rgba(255,255,255,0.65);">Service fee</span>
+              <span style="font-size:13px;font-weight:600;color:#fff;">${c.fee}</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="background:${this.difficultyBg(c.difficulty)};color:${this.difficultyColor(c.difficulty)};font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;">${c.difficulty}</div>
+            <span style="font-size:13px;font-weight:700;color:#e8c96a;">Apply →</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    window.__gvsOpenModal = (name) => {
+      const c = this.countries.find(x => x.name === name);
+      if (!c) return;
+      const modal = document.getElementById('modal');
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <div style="background:linear-gradient(135deg,#0B1F3A,#1e3a6e);padding:40px;border-radius:24px 24px 0 0;display:flex;justify-content:space-between;align-items:flex-start;">
+          <div style="display:flex;align-items:center;gap:20px;">
+            <span style="font-size:56px;">${c.flag}</span>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:#C9A84C;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">${c.type}</div>
+              <h2 style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#fff;">${c.name}</h2>
+            </div>
+          </div>
+          <button onclick="document.getElementById('modal').style.display='none'" style="background:rgba(255,255,255,0.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">✕</button>
+        </div>
+        <div style="padding:36px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
+            <div style="background:#F8F6F1;border-radius:12px;padding:18px;">
+              <div style="font-size:11px;color:#8a8980;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Get Visa By</div>
+              <div style="font-size:17px;font-weight:700;color:#1F8A5B;">${this.getVisaByDate(c.processing)}</div>
+            </div>
+            <div style="background:#F8F6F1;border-radius:12px;padding:18px;">
+              <div style="font-size:11px;color:#8a8980;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">GVS Service Fee</div>
+              <div style="font-size:17px;font-weight:700;color:#0B1F3A;">${c.fee}</div>
+            </div>
+            <div style="background:#F8F6F1;border-radius:12px;padding:18px;">
+              <div style="font-size:11px;color:#8a8980;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Entry Type</div>
+              <div style="font-size:17px;font-weight:700;color:#0B1F3A;">${c.entry}</div>
+            </div>
+            <div style="background:#F8F6F1;border-radius:12px;padding:18px;">
+              <div style="font-size:11px;color:#8a8980;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Difficulty</div>
+              <div style="font-size:17px;font-weight:700;color:${this.difficultyColor(c.difficulty)};">${c.difficulty}</div>
+            </div>
+          </div>
+          ${c.evisa ? `<div style="background:rgba(31,138,91,0.08);border:1.5px solid rgba(31,138,91,0.2);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:20px;"><span style="color:#1F8A5B;font-size:18px;">✓</span><div><div style="font-weight:700;font-size:14px;color:#1F8A5B;">e-Visa / Online Application Available</div><div style="font-size:13px;color:#5a6580;margin-top:2px;">You can apply online without visiting a consulate.</div></div></div>` : ''}
+          <div style="background:#fffbf0;border:1.5px solid rgba(201,168,76,0.25);border-radius:12px;padding:16px 20px;margin-bottom:28px;">
+            <div style="font-size:12px;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Expert Notes</div>
+            <div style="font-size:14px;color:#3a4560;line-height:1.7;">${c.notes}</div>
+          </div>
+          <a href="Contact.dc.html" style="display:block;text-align:center;background:linear-gradient(135deg,#C9A84C,#e8c96a);color:#0B1F3A;font-size:15px;font-weight:700;padding:16px;border-radius:10px;text-decoration:none;">Apply for ${c.name} Visa →</a>
+          <div style="text-align:center;margin-top:12px;font-size:12px;color:#b0ac9f;">Embassy fees are additional and vary. We'll confirm exact costs during consultation.</div>
+        </div>
+      `;
+      modal.style.display = 'flex';
+    };
+  }
+
+  renderVals() {
+    return {
+      closeModalBg: (e) => { if (e.target === document.getElementById('modal')) document.getElementById('modal').style.display = 'none'; },
+      stopProp: (e) => e.stopPropagation(),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

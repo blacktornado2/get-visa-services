@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; color: #1a2540; background: #fff; transition: background 0.35s, color 0.35s; }
+  </style>
+  <style id="gvs-theme-css">
+    section, nav, footer, div, h1, h2, h3, h4, p, a, input, select, button, span { transition: background 0.35s, color 0.35s, border-color 0.35s; }
+    [data-theme="light"] body { background: #FDF6F0 !important; color: #1a0a0f !important; }
+    [data-theme="dark"]  body { background: #12121f !important; color: #fff !important; }
+    [data-theme="light"] nav { background: rgba(255,255,255,0.97) !important; border-bottom-color: rgba(61,26,36,0.12) !important; }
+    [data-theme="dark"]  nav { background: rgba(13,13,26,0.97) !important; border-bottom-color: rgba(184,115,51,0.2) !important; }
+    [data-theme="light"] .gvs-logo-box { background: linear-gradient(135deg,#3D1A24,#6b2d3e) !important; }
+    [data-theme="dark"]  .gvs-logo-box { background: linear-gradient(135deg,#B87333,#d4905a) !important; }
+    [data-theme="light"] .gvs-logo-box span { color: #D4A96A !important; }
+    [data-theme="dark"]  .gvs-logo-box span { color: #0D0D1A !important; }
+    [data-theme="light"] .gvs-logo-name { color: #3D1A24 !important; }
+    [data-theme="dark"]  .gvs-logo-name { color: #fff !important; }
+    [data-theme="light"] .gvs-logo-sub  { color: #9b4a5a !important; }
+    [data-theme="dark"]  .gvs-logo-sub  { color: #B87333 !important; }
+    [data-theme="light"] .gvs-navlink   { color: #3a3030 !important; opacity: 1 !important; }
+    [data-theme="dark"]  .gvs-navlink   { color: rgba(255,255,255,0.8) !important; }
+    [data-theme="light"] .gvs-nav-cta   { background: linear-gradient(135deg,#3D1A24,#6b2d3e) !important; color: #D4A96A !important; }
+    [data-theme="dark"]  .gvs-nav-cta   { background: linear-gradient(135deg,#B87333,#d4905a) !important; color: #0D0D1A !important; }
+    .theme-toggle { display:flex;align-items:center;gap:6px;background:transparent;border:1.5px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 14px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,0.85);white-space:nowrap; }
+    [data-theme="light"] .theme-toggle { border-color:rgba(61,26,36,0.2);color:#3D1A24; }
+    .theme-toggle:hover { opacity:0.8; }
+    [data-theme="light"] [data-bg="white"]  { background: #FDF6F0 !important; }
+    [data-theme="dark"]  [data-bg="white"]  { background: #12121f !important; }
+    [data-theme="light"] [data-bg="cream"]  { background: #fff !important; }
+    [data-theme="dark"]  [data-bg="cream"]  { background: #1a1a2e !important; }
+    [data-theme="light"] [data-bg="dark"]   { background: linear-gradient(135deg,#3D1A24,#6b2d3e) !important; }
+    [data-theme="dark"]  [data-bg="dark"]   { background: linear-gradient(135deg,#0D0D1A,#1a1a3e) !important; }
+    [data-theme="light"] [data-bg="cta"]    { background: linear-gradient(135deg,#D4A96A,#e8c285) !important; }
+    [data-theme="dark"]  [data-bg="cta"]    { background: linear-gradient(135deg,#B87333,#d4905a) !important; }
+    [data-theme="light"] [data-bg="white"] h2,[data-theme="light"] [data-bg="white"] h3,[data-theme="light"] [data-bg="white"] h4,
+    [data-theme="light"] [data-bg="cream"] h2,[data-theme="light"] [data-bg="cream"] h3,[data-theme="light"] [data-bg="cream"] h4 { color: #1a0a0f !important; }
+    [data-theme="dark"]  [data-bg="white"] h2,[data-theme="dark"]  [data-bg="white"] h3,[data-theme="dark"]  [data-bg="white"] h4,
+    [data-theme="dark"]  [data-bg="cream"] h2,[data-theme="dark"]  [data-bg="cream"] h3,[data-theme="dark"]  [data-bg="cream"] h4 { color: #fff !important; }
+    [data-theme="light"] [data-bg="white"] p,[data-theme="light"] [data-bg="cream"] p { color: #5a3a3a !important; }
+    [data-theme="dark"]  [data-bg="white"] p,[data-theme="dark"]  [data-bg="cream"] p { color: rgba(255,255,255,0.65) !important; }
+    [data-theme="light"] [data-bg="cta"] h2 { color: #3D1A24 !important; }
+    [data-theme="light"] [data-bg="cta"] p  { color: rgba(61,26,36,0.7) !important; }
+    [data-theme="dark"]  [data-bg="cta"] h2 { color: #0D0D1A !important; }
+    [data-theme="dark"]  [data-bg="cta"] p  { color: rgba(13,13,26,0.7) !important; }
+    [data-theme="light"] footer { background: #3D1A24 !important; }
+    [data-theme="dark"]  footer { background: #0D0D1A !important; }
+    [data-theme="light"] .gvs-accent { color: #D4A96A !important; }
+    [data-theme="dark"]  .gvs-accent { color: #B87333 !important; }
+    [data-theme="light"] .gvs-navy   { color: #3D1A24 !important; }
+    [data-theme="dark"]  .gvs-navy   { color: #fff !important; }
+    [data-theme="light"] .gvs-btn-navy { background: #3D1A24 !important; }
+    [data-theme="dark"]  .gvs-btn-navy { background: #0D0D1A !important; }
+    [data-theme="light"] .gvs-btn-gold { background: linear-gradient(135deg,#D4A96A,#e8c285) !important; color: #3D1A24 !important; }
+    [data-theme="dark"]  .gvs-btn-gold { background: linear-gradient(135deg,#B87333,#d4905a) !important; color: #0D0D1A !important; }
+    [data-theme="light"] .gvs-card { background: #fff !important; border-color: #e8d8cc !important; }
+    [data-theme="dark"]  .gvs-card { background: #1a1a2e !important; border-color: rgba(184,115,51,0.2) !important; }
+    [data-theme="dark"]  .gvs-card p { color: rgba(255,255,255,0.65) !important; }
+    [data-theme="light"] input, [data-theme="light"] select, [data-theme="light"] textarea { background: #fff !important; border-color: #e8d8cc !important; color: #1a0a0f !important; }
+    [data-theme="dark"]  input, [data-theme="dark"]  select, [data-theme="dark"]  textarea { background: rgba(255,255,255,0.07) !important; border-color: rgba(184,115,51,0.2) !important; color: #fff !important; }
+  </style>
+  <script>
+    (function(){var t=localStorage.getItem('gvs-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <script>
+    (function(){
+      function classify(){
+        document.querySelectorAll('section').forEach(function(el){
+          if (el.hasAttribute('data-bg')) return;
+          var s = el.getAttribute('style') || '';
+          if (s.indexOf('#F8F6F1') !== -1 || s.indexOf('rgb(248, 246, 241)') !== -1) el.setAttribute('data-bg','cream');
+          else if ((s.indexOf('background:#fff') !== -1 || s.indexOf('background: #fff') !== -1 || s.indexOf('background: rgb(255, 255, 255)') !== -1) && s.indexOf('gradient') === -1) el.setAttribute('data-bg','white');
+          else if ((s.indexOf('#0B1F3A') !== -1 || s.indexOf('rgb(11, 31, 58)') !== -1) && s.indexOf('gradient') !== -1) el.setAttribute('data-bg','dark');
+          else if ((s.indexOf('#C9A84C') !== -1 || s.indexOf('rgb(201, 168, 76)') !== -1) && s.indexOf('gradient') !== -1) el.setAttribute('data-bg','cta');
+        });
+        document.querySelectorAll('[style]').forEach(function(el){
+          var s = el.getAttribute('style') || '';
+          var tag = el.tagName;
+          var inDark = el.closest('[data-bg="dark"]') || el.closest('footer') || el.closest('nav');
+          if (!inDark) {
+            if (s.indexOf('color:#C9A84C') !== -1 || s.indexOf('color: rgb(201, 168, 76)') !== -1) el.classList.add('gvs-accent');
+            if (s.indexOf('color:#0B1F3A') !== -1 || s.indexOf('color: rgb(11, 31, 58)') !== -1) el.classList.add('gvs-navy');
+          }
+          if ((tag==='A'||tag==='BUTTON') && (s.indexOf('background:#0B1F3A') !== -1 || s.indexOf('background: rgb(11, 31, 58)') !== -1)) el.classList.add('gvs-btn-navy');
+          if ((tag==='A'||tag==='BUTTON') && (s.indexOf('background:linear-gradient(135deg,#C9A84C') !== -1 || s.indexOf('linear-gradient(135deg, rgb(201, 168, 76)') !== -1)) el.classList.add('gvs-btn-gold');
+        });
+        var t = document.documentElement.getAttribute('data-theme') || 'light';
+        document.querySelectorAll('.theme-toggle').forEach(function(b){ b.textContent = t==='dark' ? '☀️ Light' : '🌙 Dark'; });
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', classify);
+      else classify();
+      setTimeout(classify, 300);
+      setTimeout(classify, 1200);
+      var mo = new MutationObserver(function(){ classify(); });
+      function armMO(){ if (document.body) { mo.observe(document.body, {childList:true, subtree:true}); setTimeout(function(){ mo.disconnect(); }, 5000); } else setTimeout(armMO, 100); }
+      armMO();
+    })();
+  </script>
+</helmet>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,31,58,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:68px;">
+    <a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <div class="gvs-logo-box" style="width:38px;height:38px;background:linear-gradient(135deg,#C9A84C,#e8c96a);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:#0B1F3A;">G</span>
+      </div>
+      <div>
+        <div class="gvs-logo-name" style="font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:#fff;letter-spacing:0.3px;">GVS</div>
+        <div class="gvs-logo-sub" style="font-size:9px;color:#C9A84C;letter-spacing:1.5px;text-transform:uppercase;margin-top:-2px;">Get Visa Services</div>
+      </div>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="Home.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">Home</a>
+      <a href="Services.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">Services</a>
+      <a href="Countries.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">Countries</a>
+      <a href="About.dc.html" style="font-size:14px;font-weight:500;color:#C9A84C;text-decoration:none;">About</a>
+      <a href="Blog.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">Blog</a>
+      <a href="Contact.dc.html" class="gvs-navlink" style="font-size:14px;font-weight:500;color:#fff;text-decoration:none;opacity:0.7;">Contact</a>
+      <button class="theme-toggle" onclick="(function(){var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('gvs-theme',t);document.querySelectorAll('.theme-toggle').forEach(function(b){b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';});})()">🌙 Dark</button>
+      <a href="Contact.dc.html" class="gvs-nav-cta" style="background:linear-gradient(135deg,#C9A84C,#e8c96a);color:#0B1F3A;font-size:13px;font-weight:700;padding:10px 22px;border-radius:6px;text-decoration:none;">Get Free Consultation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section style="padding:140px 32px 72px;background:linear-gradient(160deg,#0B1F3A 0%,#0f2d56 100%);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+      <a href="Home.dc.html" style="font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;">Home</a>
+      <span style="font-size:13px;color:rgba(255,255,255,0.25);">›</span>
+      <span style="font-size:13px;color:#C9A84C;">About</span>
+    </div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:56px;font-weight:700;color:#fff;margin-bottom:20px;line-height:1.1;">About GVS</h1>
+    <p style="font-size:18px;color:rgba(255,255,255,0.65);max-width:560px;line-height:1.7;">India's trusted tourist visa partner — simplifying international travel for individuals and businesses since 2009.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section style="padding:100px 32px;background:#fff;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+    <div>
+      <div style="font-size:12px;font-weight:600;color:#C9A84C;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Our Story</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:#0B1F3A;margin-bottom:24px;line-height:1.15;">Built on 15 Years of Getting Travellers Where They Need to Go</h2>
+      <p style="font-size:16px;color:#5a6580;line-height:1.8;margin-bottom:20px;">GVS started in 2009 with a single office in Mumbai and a simple belief: applying for a visa shouldn't feel harder than planning the trip itself.</p>
+      <p style="font-size:16px;color:#5a6580;line-height:1.8;margin-bottom:20px;">Today we process thousands of tourist visa applications every year across 150+ destinations — with a documentation-first process that keeps our rejection rate under 2%.</p>
+      <p style="font-size:16px;color:#5a6580;line-height:1.8;">Our consultants track embassy requirements daily, so your application is always prepared against the latest rules — not last year's checklist.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div class="gvs-card" style="background:#F8F6F1;border:1.5px solid #e8e4da;border-radius:16px;padding:28px;">
+        <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:#C9A84C;margin-bottom:8px;">15+</div>
+        <div style="font-size:14px;color:#5a6580;">Years of Experience</div>
+      </div>
+      <div class="gvs-card" style="background:#F8F6F1;border:1.5px solid #e8e4da;border-radius:16px;padding:28px;">
+        <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:#C9A84C;margin-bottom:8px;">10K+</div>
+        <div style="font-size:14px;color:#5a6580;">Visas Processed</div>
+      </div>
+      <div class="gvs-card" style="background:#F8F6F1;border:1.5px solid #e8e4da;border-radius:16px;padding:28px;">
+        <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:#C9A84C;margin-bottom:8px;">98%</div>
+        <div style="font-size:14px;color:#5a6580;">Approval Rate</div>
+      </div>
+      <div class="gvs-card" style="background:#F8F6F1;border:1.5px solid #e8e4da;border-radius:16px;padding:28px;">
+        <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:#C9A84C;margin-bottom:8px;">150+</div>
+        <div style="font-size:14px;color:#5a6580;">Countries Covered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section style="padding:100px 32px;background:#F8F6F1;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <div style="display:inline-block;font-size:12px;font-weight:600;color:#C9A84C;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Why GVS</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#0B1F3A;">What We Stand For</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+      <div class="gvs-card" style="background:#fff;border:1.5px solid #e8e4da;border-radius:16px;padding:36px;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:21px;font-weight:600;color:#0B1F3A;margin-bottom:12px;">Honesty First</h3>
+        <p style="font-size:14px;color:#5a6580;line-height:1.7;">If your profile has a weak spot, we tell you before you pay — not after a rejection. No false promises, no guaranteed-approval claims.</p>
+      </div>
+      <div class="gvs-card" style="background:#fff;border:1.5px solid #e8e4da;border-radius:16px;padding:36px;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:21px;font-weight:600;color:#0B1F3A;margin-bottom:12px;">Speed Without Shortcuts</h3>
+        <p style="font-size:14px;color:#5a6580;line-height:1.7;">Applications filed within 48 hours of complete documentation. Fast because our process is tight — never because we skip checks.</p>
+      </div>
+      <div class="gvs-card" style="background:#fff;border:1.5px solid #e8e4da;border-radius:16px;padding:36px;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:21px;font-weight:600;color:#0B1F3A;margin-bottom:12px;">A Human on Every Case</h3>
+        <p style="font-size:14px;color:#5a6580;line-height:1.7;">No ticket queues. Every application has a named consultant you can reach on WhatsApp — from first call to visa in hand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFICES -->
+<section style="padding:100px 32px;background:#fff;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <div style="display:inline-block;font-size:12px;font-weight:600;color:#C9A84C;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Where We Are</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#0B1F3A;">Our Offices</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+      <div class="gvs-card" style="background:#F8F6F1;border:1.5px solid #e8e4da;border-radius:16px;padding:32px;">
+        <div style="font-size:12px;font-weight:700;color:#C9A84C;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Headquarters</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#0B1F3A;margin-bottom:10px;">Mumbai</h3>
+        <p style="font-size:14px;color:#5a6580;line-height:1.7;">Level 8, Bandra Kurla Complex,<br/>Bandra East, Mumbai 400 051</p>
+      </div>
+      <div class="gvs-card" style="background:#F8F6F1;border:1.5px solid #e8e4da;border-radius:16px;padding:32px;">
+        <div style="font-size:12px;font-weight:700;color:#C9A84C;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">North India</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#0B1F3A;margin-bottom:10px;">Delhi</h3>
+        <p style="font-size:14px;color:#5a6580;line-height:1.7;">4th Floor, Connaught Place,<br/>New Delhi 110 001</p>
+      </div>
+      <div class="gvs-card" style="background:#F8F6F1;border:1.5px solid #e8e4da;border-radius:16px;padding:32px;">
+        <div style="font-size:12px;font-weight:700;color:#C9A84C;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">South India</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#0B1F3A;margin-bottom:10px;">Bangalore</h3>
+        <p style="font-size:14px;color:#5a6580;line-height:1.7;">MG Road,<br/>Bangalore 560 001</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section style="background:linear-gradient(135deg,#C9A84C 0%,#e8c96a 100%);padding:80px 32px;">
+  <div style="max-width:800px;margin:0 auto;text-align:center;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#0B1F3A;margin-bottom:16px;">Plan Your Next Trip With Us</h2>
+    <p style="font-size:17px;color:rgba(11,31,58,0.7);margin-bottom:40px;line-height:1.6;">Free consultation with our experts. No obligations — just honest advice.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="Contact.dc.html" style="background:#0B1F3A;color:#fff;font-size:15px;font-weight:700;padding:16px 36px;border-radius:8px;text-decoration:none;">Book Free Consultation</a>
+      <a href="Countries.dc.html" style="border:2px solid #0B1F3A;color:#0B1F3A;font-size:15px;font-weight:700;padding:16px 36px;border-radius:8px;text-decoration:none;">Browse Destinations</a>
+    </div>
+  </div>
+</section>
+
+<a href="https://wa.me/911234567890" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" style="position:fixed;bottom:28px;right:28px;z-index:200;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,0.45);text-decoration:none;">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- FOOTER -->
+<footer style="background:#0B1F3A;padding:48px 32px 32px;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:32px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="gvs-logo-box" style="width:38px;height:38px;background:linear-gradient(135deg,#C9A84C,#e8c96a);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:#0B1F3A;">G</span>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:#fff;">GVS — Get Visa Services</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;">getvisaservices.in</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;">
+      <a href="Home.dc.html" style="font-size:14px;color:rgba(255,255,255,0.5);text-decoration:none;">Home</a>
+      <a href="Countries.dc.html" style="font-size:14px;color:rgba(255,255,255,0.5);text-decoration:none;">Countries</a>
+      <a href="Blog.dc.html" style="font-size:14px;color:rgba(255,255,255,0.5);text-decoration:none;">Blog</a>
+      <a href="Contact.dc.html" style="font-size:14px;color:rgba(255,255,255,0.5);text-decoration:none;">Contact</a>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;text-align:center;">
+    <div style="font-size:13px;color:rgba(255,255,255,0.3);">© 2025 GVS - Get Visa Services. All rights reserved.</div>
+  </div>
+</footer>
+
+</x-dc>
+</body>
+</html>
