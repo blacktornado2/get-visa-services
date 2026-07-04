@@ -32,7 +32,7 @@ Typography scale, spacing, radii: as listed in README (H1 56px/700, H2 44px/700,
 ## Data Model
 
 ### Canonical country dataset
-Single source of truth: `src/data/countries.ts`, a 37-entry array combining the Countries.dc.html dataset (superset) — **the divergent 20-country dataset embedded separately in Home.dc.html is dropped entirely**. Both Home's "Popular Countries" grid and the Countries page use the same `CountryCard` component and the same data array (per README's explicit "single shared component" instruction).
+Single source of truth: `src/data/countries.ts`, a 39-entry array combining the Countries.dc.html dataset (superset — the original extraction undercounted this as 37; the actual table has 39 rows including Maldives and Mauritius) — **the divergent 20-country dataset embedded separately in Home.dc.html is dropped entirely**. Both Home's "Popular Countries" grid and the Countries page use the same `CountryCard` component and the same data array (per README's explicit "single shared component" instruction).
 
 Each entry:
 ```ts
@@ -60,7 +60,7 @@ type Country = {
 - `processingDaysEstimate`: upper bound of the processing range in days (e.g. "10–15 days" → 15; "4–8 weeks" → 56; "On arrival"/"Instant"/"Instant–24 hrs" → 1; "2–3 days" → 3). Used for the "Get visa by {date}" badge and the Home processing-speed filter (`fast` ≤5, `medium` 6–21, `slow` 22+, matching the prototype's buckets).
 - `visaCategory`: `'arrival'` if `type` or `processing` indicates on-arrival issuance (e.g. type contains "Visa on Arrival", or "Tourist Card"); else `'evisa'` if `evisa === true`; else `'embassy'`.
 
-Full 37-country data (name / flag / region / type / entry / processing / fee / evisa / difficulty / popular / code / notes), to be transcribed into `countries.ts` during implementation:
+Full 39-country data (name / flag / region / type / entry / processing / fee / evisa / difficulty / popular / code / notes), to be transcribed into `countries.ts` during implementation:
 
 | Name | Flag | Region | Type | Entry | Processing | Fee | e-Visa | Difficulty | Popular | Code | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -104,7 +104,7 @@ Full 37-country data (name / flag / region / type / entry / processing / fee / e
 | Maldives | 🇲🇻 | asia | Visa on Arrival | Single | On arrival | Free | Yes | Easy | Yes | mv | Free 30-day visa on arrival for all nationalities. No application needed. |
 | Mauritius | 🇲🇺 | africa | Visa on Arrival | Single | On arrival | Free | Yes | Easy | No | mu | Free visa on arrival for Indian passport holders. Up to 90 days. |
 
-Note: only 12 of 37 are flagged `popular: true` above (France, UK, USA, Canada, Thailand, Japan, Australia, Singapore, Bali, Vietnam, UAE, Maldives). Home's "Popular Countries" grid needs 20 for its 4×5 layout — implementation should mark 8 more as `popular: true` to reach 20 (reasonable picks: well-known/high-search destinations not already flagged, e.g. Germany, Italy, Switzerland, South Korea, New Zealand, Sri Lanka, Malaysia, Saudi Arabia — exact picks are a low-stakes implementation-time choice, not a design decision).
+Note: only 12 of 39 are flagged `popular: true` above (France, UK, USA, Canada, Thailand, Japan, Australia, Singapore, Bali, Vietnam, UAE, Maldives). Home's "Popular Countries" grid needs 20 for its 4×5 layout — implementation should mark 8 more as `popular: true` to reach 20 (reasonable picks: well-known/high-search destinations not already flagged, e.g. Germany, Italy, Switzerland, South Korea, New Zealand, Sri Lanka, Malaysia, Saudi Arabia — exact picks are a low-stakes implementation-time choice, not a design decision).
 
 Country card behavior (both Home and Countries pages, shared `CountryCard` component): `aspect-ratio: 3/4`, background photo (unsplash primary, picsum fallback, `flagcdn.com/w640/un.png` final fallback), zooms 1.08x on hover, round flag badge (flagcdn.com) centered mid-card, "e-Visa"/"Popular" badges, frosted-glass bottom panel with name / type tag / "Get visa by {date}" line, difficulty pill (Easy `#1F8A5B` / Moderate `#C9A84C` / Hard `#C94C4C`), fee. Click opens a modal with full details (+ `notes`) and an "Apply for {name} Visa" CTA linking to `/contact`.
 
@@ -130,7 +130,7 @@ Shared root layout renders **Nav** + page content + **Footer** + floating **What
 Order: Nav → **How It Works** (4 steps: Consult / Document / Apply / Travel, each with description, alternating navy/gold numbered badges + connecting gradient line) → **Quick Inquiry** form card (Full Name, Phone/WhatsApp, Visa Type select, Destination Country; submit "Submit Inquiry — We'll Call You Back →"; disclaimer "🔒 Your data is safe with us. No spam, ever.") → **Popular Countries** (filterable 20-country grid, 4×5) → **About strip** (heading "India's Most Trusted Visa Service Partner", 2 paragraphs, CTA "Talk to an Expert →", 4 stat tiles: 15+ Years of Experience / 500+ Corporate Clients / 48hr Avg. Processing Start / 24/7 Support Available) → **Testimonials** (3 cards, ★★★★★: Rahul Sharma/Infosys, Priya Mehta/TCS, Amit Joshi/Joshi Exports — quotes per extraction) → **FAQ** (5 Q&As, collapsible: processing time / corporate bulk packages / rejection handling / status tracking / city coverage; CTA "Have more questions? Contact us →") → **CTA banner** ("Ready to Start Your Visa Journey?", "Book Free Consultation" + "📞 Call Now" tel: link) → Footer.
 
 ### 2. Countries (`/countries`)
-Full destination browser: same search + region-pill filter, all 37 countries in a larger grid, same shared `CountryCard`.
+Full destination browser: same search + region-pill filter, all 39 countries in a larger grid, same shared `CountryCard`.
 
 ### 3. Services (`/services`)
 Tourist/travel visa only (no business/student/work content, per README direction): Hero (breadcrumb + "Tourist Visa Services" + subcopy) → main service block (description, 6-item "What's Included" checklist, stat sidebar: 5–15 business days / 98% approval / 150+ countries, "Apply Now →") → Document Checklist (6 cards: Passport, Photos, Bank Statements, ITR/Income Proof, Travel Insurance, Travel Itinerary) → Pricing (3 tiers: Essential ₹1,499, Professional ₹2,999 "Most Popular", Corporate custom "for 5+ employees" → "Contact Sales") → Footer.
