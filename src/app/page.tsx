@@ -33,6 +33,9 @@ export default function HomePage() {
     <>
       <section id="countries" className="mx-auto max-w-[1200px] px-8 py-[100px]">
         <h2 className="text-center font-display text-4xl font-bold text-foreground">Popular Countries</h2>
+        <p className="mx-auto mt-4 max-w-xl text-center text-foreground-secondary">
+          Trusted visa support for the destinations Indian travelers book most.
+        </p>
         <div className="mt-8">
           <FilterBar variant="selects" filters={filters} onChange={setFilters} />
         </div>
@@ -84,17 +87,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="faq" className="mx-auto max-w-[1200px] px-8 py-[100px]">
-        <h2 className="text-center font-display text-4xl font-bold text-foreground">Frequently Asked Questions</h2>
-        <div className="mt-8">
-          <FaqAccordion faqs={faqs} />
+      <section id="faq" className="bg-surface px-8 py-[100px]">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="text-center font-display text-4xl font-bold text-foreground">Frequently Asked Questions</h2>
+          <div className="mt-8">
+            <FaqAccordion faqs={faqs} />
+          </div>
+          <p className="mt-6 text-center text-sm text-foreground-secondary">
+            Have more questions?{" "}
+            <a href="/contact" className="font-semibold text-accent">
+              Contact us →
+            </a>
+          </p>
         </div>
-        <p className="mt-6 text-center text-sm text-foreground-secondary">
-          Have more questions?{" "}
-          <a href="/contact" className="font-semibold text-accent">
-            Contact us →
-          </a>
-        </p>
       </section>
 
       <CtaBanner

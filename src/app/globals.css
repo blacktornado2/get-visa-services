@@ -51,3 +51,99 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
 }
+
+/* Light/dark switch, adapted from https://codepen.io/bheberer/pen/BaNZKmq.
+   Every measurement below is in `em`, scaled by .theme-toggle-slot's own
+   font-size — resize the whole switch by changing that one value. */
+.theme-toggle {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.theme-toggle-checkbox {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.theme-toggle-slot {
+  position: relative;
+  /* Tailwind's preflight forces box-sizing: border-box globally; the em
+     math below is ported from the original pen, which assumes content-box
+     (the browser default), so it's restored here to keep the geometry. */
+  box-sizing: content-box;
+  font-size: 3px;
+  height: 10em;
+  width: 26em;
+  border: 3px solid #8b6767;
+  border-radius: 10em;
+  background-color: white;
+  transition: background-color 350ms;
+}
+
+.theme-toggle-checkbox:checked ~ .theme-toggle-slot {
+  background-color: #374151;
+}
+
+.theme-toggle-button {
+  transform: translate(17.75em, 1.75em);
+  position: absolute;
+  height: 6.5em;
+  width: 6.5em;
+  border-radius: 50%;
+  background-color: #ffeccf;
+  box-shadow: inset 0px 0px 0px 0.75em #ffbb52;
+  transition: background-color 250ms, border-color 250ms, transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71);
+}
+
+.theme-toggle-checkbox:checked ~ .theme-toggle-slot .theme-toggle-button {
+  background-color: #485367;
+  box-shadow: inset 0px 0px 0px 0.75em white;
+  transform: translate(1.75em, 1.75em);
+}
+
+.theme-toggle-sun,
+.theme-toggle-moon {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+}
+
+.theme-toggle-sun {
+  color: #ffbb52;
+}
+
+.theme-toggle-sun-wrapper {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  opacity: 1;
+  transform: translate(2em, 2em) rotate(15deg);
+  transform-origin: 50% 50%;
+  transition: opacity 150ms, transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71);
+}
+
+.theme-toggle-checkbox:checked ~ .theme-toggle-slot .theme-toggle-sun-wrapper {
+  opacity: 0;
+  transform: translate(3em, 2em) rotate(0deg);
+}
+
+.theme-toggle-moon {
+  color: white;
+}
+
+.theme-toggle-moon-wrapper {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  opacity: 0;
+  transform: translate(17em, 2em) rotate(0deg);
+  transform-origin: 50% 50%;
+  transition: opacity 150ms, transform 500ms cubic-bezier(0.26, 2.5, 0.46, 0.71);
+}
+
+.theme-toggle-checkbox:checked ~ .theme-toggle-slot .theme-toggle-moon-wrapper {
+  opacity: 1;
+  transform: translate(18em, 2em) rotate(-15deg);
+}
