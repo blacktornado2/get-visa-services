@@ -1,9 +1,10 @@
+import Link from "next/link";
 import type { BlogPost } from "@/data/blog-posts";
 
 export function BlogCard({ post, featured = false }: { post: BlogPost; featured?: boolean }) {
   return (
-    <a
-      href="#"
+    <Link
+      href={`/blog/${post.slug}`}
       className={`block overflow-hidden rounded-card border border-card-border bg-surface ${
         featured ? "grid grid-cols-1 md:grid-cols-2" : ""
       }`}
@@ -24,6 +25,6 @@ export function BlogCard({ post, featured = false }: { post: BlogPost; featured?
         <p className="mt-2 text-sm text-foreground-secondary">{post.excerpt}</p>
         {featured && <p className="mt-4 text-sm font-semibold text-accent">Read the guide →</p>}
       </div>
-    </a>
+    </Link>
   );
 }
