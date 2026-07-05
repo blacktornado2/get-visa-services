@@ -27,7 +27,7 @@ const noFlashThemeScript = `(function(){try{var t=localStorage.getItem('gvs-them
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${jakarta.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashThemeScript }} />
       </head>
