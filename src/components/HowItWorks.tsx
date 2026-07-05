@@ -13,20 +13,28 @@ export function HowItWorks() {
         <h2 className="mt-2 text-center font-display text-4xl font-bold text-foreground">
           Your Visa in 4 Simple Steps
         </h2>
-        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-4">
-          {STEPS.map((step, i) => (
-            <div key={step.title} className="text-center">
-              <div
-                className={`mx-auto flex h-14 w-14 items-center justify-center rounded-full font-display text-lg font-bold text-white ${
-                  i % 2 === 0 ? "bg-nav-surface" : "bg-accent"
-                }`}
-              >
-                {i + 1}
+        <div className="relative mt-12">
+          <div
+            className="absolute top-7 left-[12.5%] right-[12.5%] hidden h-0.5 md:block"
+            style={{
+              backgroundImage: "linear-gradient(90deg, var(--nav-surface), var(--card-border) 50%, var(--accent))",
+            }}
+          />
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+            {STEPS.map((step, i) => (
+              <div key={step.title} className="text-center">
+                <div
+                  className={`relative mx-auto flex h-14 w-14 items-center justify-center rounded-full font-display text-lg font-bold text-white ${
+                    i % 2 === 0 ? "bg-nav-surface" : "bg-accent"
+                  }`}
+                >
+                  {i + 1}
+                </div>
+                <h3 className="mt-4 font-display text-lg font-semibold text-foreground">{step.title}</h3>
+                <p className="mt-2 text-sm text-foreground-secondary">{step.description}</p>
               </div>
-              <h3 className="mt-4 font-display text-lg font-semibold text-foreground">{step.title}</h3>
-              <p className="mt-2 text-sm text-foreground-secondary">{step.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -24,7 +24,7 @@ export function CountryCard({ country }: { country: Country }) {
   return (
     <Link
       href={`/countries/${country.code}`}
-      className="group relative aspect-[3/4] w-full overflow-hidden rounded-card border border-card-border text-left shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.45)]"
+      className="group relative aspect-[3/5] w-full overflow-hidden rounded-card border border-card-border text-left shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.45)]"
     >
       <img
         src={`https://picsum.photos/seed/${country.imageSeed}/800/1000`}

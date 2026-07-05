@@ -15,10 +15,10 @@
 }
 
 [data-theme="dark"] {
-  --background: #12121f;
+  --background: #1c1c30;
   --foreground: #ffffff;
   --foreground-secondary: rgba(255, 255, 255, 0.65);
-  --surface: #1a1a2e;
+  --surface: #262a45;
   --accent: #B87333;
   --nav-surface: #0D0D1A;
   --card-border: rgba(184, 115, 51, 0.2);
