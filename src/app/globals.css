@@ -5,13 +5,13 @@
   --foreground: #1a0a0f;
   --foreground-secondary: #5a3a3a;
   --surface: #ffffff;
-  --accent: #D4A96A;
+  --accent: #C08D46;
   --nav-surface: #3D1A24;
   --card-border: #e8e4da;
   --gradient-hero-start: #3D1A24;
   --gradient-hero-end: #6b2d3e;
-  --gradient-cta-start: #D4A96A;
-  --gradient-cta-end: #e8c285;
+  --gradient-cta-start: #C08D46;
+  --gradient-cta-end: #D9A968;
 }
 
 [data-theme="dark"] {

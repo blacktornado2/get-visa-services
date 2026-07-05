@@ -18,7 +18,7 @@ export function CtaBanner({ heading, subcopy, primary, secondary }: Props) {
         </Link>
         <Link
           href={secondary.href}
-          className="rounded-btn border border-white px-6 py-3 text-sm font-semibold text-white"
+          className="rounded-btn bg-white px-6 py-3 text-sm font-semibold text-nav-surface"
         >
           {secondary.label}
         </Link>
