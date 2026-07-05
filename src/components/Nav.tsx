@@ -1,0 +1,48 @@
+import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
+
+const NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/countries", label: "Countries" },
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+];
+
+export function Nav() {
+  return (
+    <header className="fixed inset-x-0 top-0 z-40 h-[68px] border-b border-card-border bg-surface/80 backdrop-blur-md">
+      <div className="mx-auto flex h-full max-w-[1200px] items-center justify-between px-8">
+        <Link href="/" className="flex items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--gradient-cta-start),var(--gradient-cta-end))] font-display text-lg font-bold text-white">
+            G
+          </span>
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-base font-bold text-foreground">GVS</span>
+            <span className="text-[10px] font-semibold tracking-[2px] text-foreground-secondary">
+              GET VISA SERVICES
+            </span>
+          </span>
+        </Link>
+
+        <nav className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => (
+            <Link key={link.href} href={link.href} className="text-sm font-medium text-foreground">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <Link
+            href="/contact"
+            className="rounded-btn bg-[linear-gradient(135deg,var(--gradient-cta-start),var(--gradient-cta-end))] px-5 py-2 text-sm font-semibold text-white"
+          >
+            Get Free Consultation
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+}
