@@ -31,15 +31,6 @@ export default function HomePage() {
 
   return (
     <>
-      <HowItWorks />
-
-      <section className="mx-auto max-w-[1200px] px-8 py-[100px]">
-        <h2 className="text-center font-display text-4xl font-bold text-foreground">Get a Free Consultation</h2>
-        <div className="mx-auto mt-8 max-w-2xl">
-          <InquiryForm />
-        </div>
-      </section>
-
       <section id="countries" className="mx-auto max-w-[1200px] px-8 py-[100px]">
         <h2 className="text-center font-display text-4xl font-bold text-foreground">Popular Countries</h2>
         <div className="mt-8">
@@ -49,6 +40,15 @@ export default function HomePage() {
           {filteredCountries.map((c) => (
             <CountryCard key={c.name} country={c} />
           ))}
+        </div>
+      </section>
+
+      <HowItWorks />
+
+      <section className="mx-auto max-w-[1200px] px-8 py-[100px]">
+        <h2 className="text-center font-display text-4xl font-bold text-foreground">Get a Free Consultation</h2>
+        <div className="mx-auto mt-8 max-w-2xl">
+          <InquiryForm />
         </div>
       </section>
 
