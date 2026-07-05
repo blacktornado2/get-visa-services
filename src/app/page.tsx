@@ -31,8 +31,18 @@ export default function HomePage() {
 
   return (
     <>
-      <section id="countries" className="mx-auto max-w-[1200px] px-8 py-[100px]">
-        <h2 className="text-center font-display text-4xl font-bold text-foreground">Popular Countries</h2>
+      <section className="bg-surface px-8 py-3">
+        <div className="mx-auto max-w-[1200px]">
+          <img
+            src="/gvs-visas-on-time-banner.png"
+            alt="GVS Get Visa Services — Visas On Time Guaranteed"
+            className="mx-auto w-full max-w-sm"
+          />
+        </div>
+      </section>
+
+      <section id="countries" className="mx-auto max-w-[1200px] px-8 py-[50px]">
+        <h2 className="text-center font-display text-5xl font-bold text-foreground">Popular Countries</h2>
         <p className="mx-auto mt-4 max-w-xl text-center text-foreground-secondary">
           Trusted visa support for the destinations Indian travelers book most.
         </p>
@@ -59,8 +69,8 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1200px]">
           <h2 className="font-display text-4xl font-bold text-foreground">India&apos;s Most Trusted Visa Service Partner</h2>
           <p className="mt-4 max-w-2xl text-foreground-secondary">
-            Founded in 2009, GVS has grown from a single Mumbai office into a nationwide consultancy trusted by
-            travellers and corporates alike.
+            A trusted extension of Vagabond Holidays, GVS has grown from its Gurgaon headquarters into a
+            consultancy trusted by travellers and corporates across India.
           </p>
           <p className="mt-4 max-w-2xl text-foreground-secondary">
             We cover visa requirements for 150+ countries, backed by consultants who track embassy rules daily so
@@ -70,7 +80,7 @@ export default function HomePage() {
             Talk to an Expert →
           </a>
           <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-            <StatTile value="15+" label="Years of Experience" />
+            <StatTile value="10+" label="Years of Experience" />
             <StatTile value="500+" label="Corporate Clients" />
             <StatTile value="48hr" label="Avg. Processing Start" />
             <StatTile value="24/7" label="Support Available" />
@@ -106,7 +116,7 @@ export default function HomePage() {
         heading="Ready to Start Your Visa Journey?"
         subcopy="Talk to a visa expert today and get a clear plan for your application."
         primary={{ label: "Book Free Consultation", href: "/contact" }}
-        secondary={{ label: "📞 Call Now", href: "tel:+911234567890" }}
+        secondary={{ label: "📞 Call Now", href: "tel:+919810545760" }}
       />
     </>
   );

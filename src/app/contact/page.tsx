@@ -3,9 +3,13 @@ import { OfficeCard } from "@/components/OfficeCard";
 import { StatTile } from "@/components/StatTile";
 
 const OFFICES = [
-  { label: "Headquarters (HQ)", city: "Mumbai", address: "Level 8, Bandra Kurla Complex, Bandra East, Mumbai 400 051" },
-  { label: "North India", city: "Delhi", address: "4th Floor, Connaught Place, New Delhi 110 001" },
-  { label: "South India", city: "Bangalore", address: "MG Road, Bangalore 560 001" },
+  {
+    label: "Headquarters (HQ)",
+    city: "Gurgaon",
+    address: "Wework, Blue 1 Square, Udyog Vihar Phase 4 Rd, Phase IV, Sector 18, Gurugram, Haryana 122015",
+  },
+  { label: "Presence", city: "Noida", address: "Serving corporate and individual clients across Noida." },
+  { label: "Presence", city: "Kolkata", address: "Serving corporate and individual clients across Kolkata." },
 ];
 
 export default function ContactPage() {
@@ -19,12 +23,12 @@ export default function ContactPage() {
         <div className="space-y-6">
           <div className="rounded-card border border-card-border bg-surface p-6">
             <p className="text-sm text-foreground-secondary">Call / WhatsApp</p>
-            <a href="tel:+911234567890" className="font-display text-lg font-semibold text-foreground">
-              +91 12345 67890
+            <a href="tel:+919810545760" className="font-display text-lg font-semibold text-foreground">
+              +91 98105 45760
             </a>
             <p className="mt-4 text-sm text-foreground-secondary">Email</p>
-            <a href="mailto:info@getvisaservices.in" className="font-display text-lg font-semibold text-foreground">
-              info@getvisaservices.in
+            <a href="mailto:ggn@getvisaservices.in" className="font-display text-lg font-semibold text-foreground">
+              ggn@getvisaservices.in
             </a>
             <p className="mt-4 text-sm text-foreground-secondary">Working Hours</p>
             <p className="font-display text-lg font-semibold text-foreground">Mon–Sat, 9am–7pm IST</p>

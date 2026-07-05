@@ -22,9 +22,13 @@ const VALUES = [
 ];
 
 const OFFICES = [
-  { label: "Headquarters", city: "Mumbai", address: "Level 8, Bandra Kurla Complex, Bandra East, Mumbai 400 051" },
-  { label: "North India", city: "Delhi", address: "4th Floor, Connaught Place, New Delhi 110 001" },
-  { label: "South India", city: "Bangalore", address: "MG Road, Bangalore 560 001" },
+  {
+    label: "Headquarters",
+    city: "Gurgaon",
+    address: "Wework, Blue 1 Square, Udyog Vihar Phase 4 Rd, Phase IV, Sector 18, Gurugram, Haryana 122015",
+  },
+  { label: "Presence", city: "Noida", address: "Serving corporate and individual clients across Noida." },
+  { label: "Presence", city: "Kolkata", address: "Serving corporate and individual clients across Kolkata." },
 ];
 
 export default function AboutPage() {
@@ -41,26 +45,29 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
           <div>
             <h2 className="font-display text-3xl font-bold text-foreground">
-              Built on 15 Years of Getting Travellers Where They Need to Go
+              A Trusted Extension of Vagabond Holidays
             </h2>
             <p className="mt-4 text-foreground-secondary">
-              Founded in 2009 in Mumbai, GVS started as a two-person consultancy helping local exporters get
-              business visas sorted quickly and correctly.
+              GVS - Get Visa Services is a trusted extension of Vagabond Holidays, founded in Gurgaon in 2017 by
+              Himanshu Khatri, and has since grown into a dedicated visa consultancy for individuals, families, and
+              corporates across India.
             </p>
             <p className="mt-4 text-foreground-secondary">
-              Today we process thousands of applications a year across 150+ destinations, with a rejection rate
-              under 2% — well below the industry average.
+              Our mission is to provide reliable, transparent, and hassle-free visa solutions through expert
+              guidance and personalized support — with a vision to become India&apos;s most trusted corporate visa
+              partner, delivering efficient, technology-driven visa solutions.
             </p>
             <p className="mt-4 text-foreground-secondary">
-              Our consultants track embassy rule changes daily, so your application is always built on current
-              requirements, not last year&apos;s checklist.
+              We handle both offline and online visa processing, with door-to-door document pickup and 24×7
+              customer support for destinations including Australia, China, Dubai, Schengen, Singapore, UK, Vietnam,
+              and the US.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <StatTile value="15+" label="Years of Experience" />
-            <StatTile value="10K+" label="Visas Processed" />
-            <StatTile value="98%" label="Approval Rate" />
+            <StatTile value="10+" label="Years of Experience" />
+            <StatTile value="99%" label="Success Rate" />
             <StatTile value="150+" label="Countries Covered" />
+            <StatTile value="24/7" label="Customer Support" />
           </div>
         </div>
       </section>

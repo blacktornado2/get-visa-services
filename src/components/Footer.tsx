@@ -15,17 +15,15 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--gradient-cta-start),var(--gradient-cta-end))] font-display text-lg font-bold text-white">
-              G
-            </span>
+            <img src="/gvs-icon.png" alt="" className="h-9 w-9 object-contain" />
             <span className="font-display text-base font-bold">GVS</span>
           </div>
           <p className="mt-4 text-sm text-white/70">
-            India&apos;s trusted visa service partner for businesses and corporates since 2009.
+            A trusted extension of Vagabond Holidays, serving travellers and corporates since 2017.
           </p>
-          <p className="mt-4 text-sm text-white/70">📞 +91 12345 67890</p>
-          <p className="text-sm text-white/70">✉ info@getvisaservices.in</p>
-          <p className="text-sm text-white/70">📍 Mumbai · Delhi · Bangalore</p>
+          <p className="mt-4 text-sm text-white/70">📞 +91 98105 45760</p>
+          <p className="text-sm text-white/70">✉ ggn@getvisaservices.in</p>
+          <p className="text-sm text-white/70">📍 Gurgaon · Noida · Kolkata</p>
         </div>
 
         <div>
