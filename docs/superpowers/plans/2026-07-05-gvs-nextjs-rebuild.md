@@ -110,7 +110,9 @@ git commit -m "Scaffold Next.js + TypeScript + Tailwind v4 + Vitest"
 
 **Files:**
 - Modify: `src/app/globals.css` (replace scaffold defaults with GVS design tokens)
-- Modify: `src/app/layout.tsx` (fonts + no-flash theme script — full rewrite happens in Task 12; for now just add the font loader and keep the file buildable)
+- Modify: `src/app/page.tsx` (placeholder stub — see Step 2)
+
+Note: `globals.css` references `--font-playfair`/`--font-jakarta`, which stay undefined until Task 12 wires up the actual `next/font/google` loader in `layout.tsx`. That's fine — no component using `font-display`/`font-body` is actually mounted into the rendered app until Task 12 assembles the root layout, so there's no visible gap.
 
 **Interfaces:**
 - Produces: Tailwind utilities usable by all later components: `bg-background`, `text-foreground`, `text-foreground-secondary`, `bg-surface`/`border-surface`, `bg-accent`/`text-accent`/`border-accent`, `bg-nav-surface`, `border-card-border`, `bg-whatsapp`, `text-difficulty-easy`/`text-difficulty-moderate`/`text-difficulty-hard`, `rounded-card`/`rounded-btn`/`rounded-pill`, `font-display`/`font-body`. Plus raw CSS vars `--gradient-hero-start`, `--gradient-hero-end`, `--gradient-cta-start`, `--gradient-cta-end` for gradient backgrounds via arbitrary values.
