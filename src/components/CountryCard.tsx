@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Country } from "@/data/countries";
 import { getVisaByDate, formatVisaByDate } from "@/lib/visa-dates";
 
@@ -12,7 +12,14 @@ const difficultyColor: Record<Country["difficulty"], string> = {
 
 export function CountryCard({ country }: { country: Country }) {
   const [open, setOpen] = useState(false);
-  const visaByDate = formatVisaByDate(getVisaByDate(country.processingDaysEstimate));
+  // Computed client-side after mount, not during render: this page is statically
+  // prerendered, so a build-time `new Date()` would bake a stale date into the HTML
+  // and mismatch whatever the client's clock says at hydration.
+  const [visaByDate, setVisaByDate] = useState<string | null>(null);
+
+  useEffect(() => {
+    setVisaByDate(formatVisaByDate(getVisaByDate(country.processingDaysEstimate)));
+  }, [country.processingDaysEstimate]);
 
   return (
     <>
@@ -53,7 +60,7 @@ export function CountryCard({ country }: { country: Country }) {
             {country.flag} {country.name}
           </h3>
           <p className="text-xs text-white/80">{country.type}</p>
-          <p className="mt-1 text-xs font-medium text-white">Get visa by {visaByDate}</p>
+          {visaByDate && <p className="mt-1 text-xs font-medium text-white">Get visa by {visaByDate}</p>}
           <p className={`mt-1 text-xs font-semibold ${difficultyColor[country.difficulty]}`}>
             {country.difficulty}
           </p>
@@ -96,7 +103,7 @@ export function CountryCard({ country }: { country: Country }) {
               </div>
               <div>
                 <dt className="text-foreground-secondary">Get Visa By</dt>
-                <dd className="font-medium text-foreground">{visaByDate}</dd>
+                <dd className="font-medium text-foreground">{visaByDate ?? "—"}</dd>
               </div>
               <div>
                 <dt className="text-foreground-secondary">Difficulty</dt>
