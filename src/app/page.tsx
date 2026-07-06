@@ -95,7 +95,7 @@ export default function HomePage() {
           </Reveal>
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             {testimonials.map((t, i) => (
-              <Reveal key={t.name} delay={i * 120}>
+              <Reveal key={t.name} delay={i * 120} className="h-full">
                 <TestimonialCard testimonial={t} />
               </Reveal>
             ))}
