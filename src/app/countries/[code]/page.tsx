@@ -38,7 +38,7 @@ export async function generateMetadata({
       title,
       description,
       url: `/countries/${country.code}`,
-      images: [{ url: `https://picsum.photos/seed/${country.imageSeed}/1200/630`, width: 1200, height: 630 }],
+      images: [{ url: `/landmarks/${country.code}.jpg`, width: 800, height: 800 }],
     },
   };
 }
@@ -79,8 +79,8 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-5">
           <div className="relative aspect-[3/4] overflow-hidden rounded-card border border-card-border md:col-span-2">
             <img
-              src={`https://picsum.photos/seed/${country.imageSeed}/800/1000`}
-              alt={country.name}
+              src={`/landmarks/${country.code}.jpg`}
+              alt={`Famous landmark in ${country.name}`}
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute left-2 top-2 flex gap-1">

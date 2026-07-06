@@ -18,7 +18,6 @@ function makeCountry(overrides: Partial<Country>): Country {
     difficulty: "Easy",
     popular: false,
     notes: "",
-    imageSeed: "testland",
     ...overrides,
   };
 }

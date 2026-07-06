@@ -25,7 +25,6 @@ export type Country = {
   difficulty: Difficulty;
   popular: boolean;
   notes: string;
-  imageSeed: string;
   // Optional fields migrated from legacy per-country landing pages (e.g. getvisaservices.in/us-visa/).
   // Only populated for countries migrated so far; the detail page omits sections that are absent.
   lengthOfStay?: string;
@@ -50,7 +49,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "Bank statements last 3 months required. Cover letter recommended.",
-    imageSeed: "france",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -151,7 +149,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "Strong financial proof required. Purpose of visit must be clearly stated.",
-    imageSeed: "germany",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -252,7 +249,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "Hotel bookings and travel itinerary mandatory.",
-    imageSeed: "italy",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -353,7 +349,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: false,
     notes: "Travel insurance minimum €30,000 required.",
-    imageSeed: "spain",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -454,7 +449,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: false,
     notes: "Apply at least 3 weeks in advance.",
-    imageSeed: "netherlands",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -555,7 +549,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: false,
     notes: "One of the more straightforward Schengen applications.",
-    imageSeed: "greece",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -656,7 +649,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "Not EU but part of Schengen. Higher funds proof needed.",
-    imageSeed: "switzerland",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -757,7 +749,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "Strong ties to home country required. Financial proof essential.",
-    imageSeed: "uk",
     lengthOfStay: "90 days",
     packages: [
       {
@@ -863,7 +854,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: false,
     notes: "High approval rate. Straightforward documentation.",
-    imageSeed: "portugal",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -964,7 +954,6 @@ export const countries: Country[] = [
     difficulty: "Hard",
     popular: true,
     notes: "Interview at US consulate required. Strong ties to India must be demonstrated.",
-    imageSeed: "usa",
     lengthOfStay: "90 days",
     packages: [
       {
@@ -1069,7 +1058,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "Biometrics required. Apply well in advance.",
-    imageSeed: "canada",
     lengthOfStay: "90 days",
     packages: [
       {
@@ -1155,9 +1143,9 @@ export const countries: Country[] = [
       },
     ],
   },
-  { name: "Mexico", flag: "🇲🇽", code: "mx", region: "americas", type: "Tourist Card (FMM)", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "₹1,200", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Visa-free for Indian passport holders with valid US visa.", imageSeed: "mexico" },
-  { name: "Brazil", flag: "🇧🇷", code: "br", region: "americas", type: "Tourist Visa", entry: "Single", processing: "5–10 days", processingDaysEstimate: 10, fee: "₹7,500", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa available online. Processing within 72 hours usually.", imageSeed: "brazil" },
-  { name: "Argentina", flag: "🇦🇷", code: "ar", region: "americas", type: "Tourist Visa", entry: "Single", processing: "5–10 days", processingDaysEstimate: 10, fee: "₹5,500", evisa: false, visaCategory: "embassy", difficulty: "Moderate", popular: false, notes: "Apply at Argentine consulate in your city.", imageSeed: "argentina" },
+  { name: "Mexico", flag: "🇲🇽", code: "mx", region: "americas", type: "Tourist Card (FMM)", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "₹1,200", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Visa-free for Indian passport holders with valid US visa." },
+  { name: "Brazil", flag: "🇧🇷", code: "br", region: "americas", type: "Tourist Visa", entry: "Single", processing: "5–10 days", processingDaysEstimate: 10, fee: "₹7,500", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa available online. Processing within 72 hours usually." },
+  { name: "Argentina", flag: "🇦🇷", code: "ar", region: "americas", type: "Tourist Visa", entry: "Single", processing: "5–10 days", processingDaysEstimate: 10, fee: "₹5,500", evisa: false, visaCategory: "embassy", difficulty: "Moderate", popular: false, notes: "Apply at Argentine consulate in your city." },
   {
     name: "Thailand",
     flag: "🇹🇭",
@@ -1173,7 +1161,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: true,
     notes: "Visa on arrival also available for 30 days. e-Visa recommended for longer stays.",
-    imageSeed: "thailand",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -1260,7 +1247,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "Requires invitation or travel agency itinerary. Detailed documents needed.",
-    imageSeed: "japan",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -1364,7 +1350,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "Online application. Health insurance and financial proof needed.",
-    imageSeed: "australia",
     lengthOfStay: "90 days",
     packages: [
       {
@@ -1464,7 +1449,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: true,
     notes: "e-Visa available. Very high approval rate for Indian tourists.",
-    imageSeed: "singapore",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -1545,7 +1529,7 @@ export const countries: Country[] = [
       },
     ],
   },
-  { name: "Bali / Indonesia", flag: "🇮🇩", code: "id", region: "asia", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "₹3,000", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: true, notes: "Visa on arrival at major airports. Also available as e-Visa.", imageSeed: "bali-indonesia" },
+  { name: "Bali / Indonesia", flag: "🇮🇩", code: "id", region: "asia", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "₹3,000", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: true, notes: "Visa on arrival at major airports. Also available as e-Visa." },
   {
     name: "Vietnam",
     flag: "🇻🇳",
@@ -1561,7 +1545,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: true,
     notes: "e-Visa fully online. Valid 90 days. Very straightforward process.",
-    imageSeed: "vietnam",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -1638,7 +1621,7 @@ export const countries: Country[] = [
       },
     ],
   },
-  { name: "Malaysia", flag: "🇲🇾", code: "my", region: "asia", type: "eNTRI / Visa", entry: "Single", processing: "1–3 days", processingDaysEstimate: 3, fee: "₹2,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: true, notes: "eNTRI available for Indian passport holders. 30-day stay.", imageSeed: "malaysia" },
+  { name: "Malaysia", flag: "🇲🇾", code: "my", region: "asia", type: "eNTRI / Visa", entry: "Single", processing: "1–3 days", processingDaysEstimate: 3, fee: "₹2,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: true, notes: "eNTRI available for Indian passport holders. 30-day stay." },
   {
     name: "South Korea",
     flag: "🇰🇷",
@@ -1654,7 +1637,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "K-ETA digital travel authorization available for some nationalities.",
-    imageSeed: "south-korea",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -1759,7 +1741,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: true,
     notes: "NZeTA for transit only. Full visitor visa required for Indian passport.",
-    imageSeed: "new-zealand",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -1857,7 +1838,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: true,
     notes: "Online ETA within hours. 30-day stay. Very easy process.",
-    imageSeed: "sri-lanka",
     lengthOfStay: "30 Days",
     packages: [
       {
@@ -1937,8 +1917,8 @@ export const countries: Country[] = [
       },
     ],
   },
-  { name: "Nepal", flag: "🇳🇵", code: "np", region: "asia", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "Free", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Free visa on arrival for Indian passport holders. No application needed.", imageSeed: "nepal" },
-  { name: "Philippines", flag: "🇵🇭", code: "ph", region: "asia", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "Free", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Visa on arrival for Indian passport, up to 30 days.", imageSeed: "philippines" },
+  { name: "Nepal", flag: "🇳🇵", code: "np", region: "asia", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "Free", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Free visa on arrival for Indian passport holders. No application needed." },
+  { name: "Philippines", flag: "🇵🇭", code: "ph", region: "asia", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "Free", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Visa on arrival for Indian passport, up to 30 days." },
   {
     name: "UAE (Dubai)",
     flag: "🇦🇪",
@@ -1954,7 +1934,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: true,
     notes: "e-Visa available. 30-day and 90-day options. Very high approval.",
-    imageSeed: "uae-dubai",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -2040,18 +2019,18 @@ export const countries: Country[] = [
       },
     ],
   },
-  { name: "Saudi Arabia", flag: "🇸🇦", code: "sa", region: "middleeast", type: "Tourist e-Visa", entry: "Multiple", processing: "24–72 hrs", processingDaysEstimate: 3, fee: "₹6,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: true, notes: "Online e-Visa. Valid 1 year, multiple entry, 90 days per visit.", imageSeed: "saudi-arabia" },
-  { name: "Qatar", flag: "🇶🇦", code: "qa", region: "middleeast", type: "Tourist Visa", entry: "Single", processing: "2–3 days", processingDaysEstimate: 3, fee: "₹5,200", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "Visa on arrival available. e-Visa recommended for advance planning.", imageSeed: "qatar" },
-  { name: "Oman", flag: "🇴🇲", code: "om", region: "middleeast", type: "Tourist e-Visa", entry: "Single", processing: "24–48 hrs", processingDaysEstimate: 2, fee: "₹4,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa online. 30-day visit visa. Quick processing.", imageSeed: "oman" },
-  { name: "Jordan", flag: "🇯🇴", code: "jo", region: "middleeast", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "₹4,000", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Visa on arrival available. Jordan Pass recommended for tourists.", imageSeed: "jordan" },
-  { name: "Bahrain", flag: "🇧🇭", code: "bh", region: "middleeast", type: "Tourist e-Visa", entry: "Single", processing: "Instant–24 hrs", processingDaysEstimate: 1, fee: "₹3,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa online. Very quick approval. Up to 14 days stay.", imageSeed: "bahrain" },
-  { name: "Kenya", flag: "🇰🇪", code: "ke", region: "africa", type: "e-Visa", entry: "Single", processing: "3–5 days", processingDaysEstimate: 5, fee: "₹4,200", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa mandatory since 2023. Apply at evisa.go.ke.", imageSeed: "kenya" },
-  { name: "Tanzania", flag: "🇹🇿", code: "tz", region: "africa", type: "Tourist Visa", entry: "Single", processing: "2–5 days", processingDaysEstimate: 5, fee: "₹4,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa available. Visa on arrival also possible at major ports.", imageSeed: "tanzania" },
-  { name: "South Africa", flag: "🇿🇦", code: "za", region: "africa", type: "Tourist Visa", entry: "Single", processing: "10–15 days", processingDaysEstimate: 15, fee: "₹7,000", evisa: false, visaCategory: "embassy", difficulty: "Moderate", popular: false, notes: "Apply at VFS centre. Biometrics required.", imageSeed: "south-africa" },
-  { name: "Morocco", flag: "🇲🇦", code: "ma", region: "africa", type: "Tourist Visa", entry: "Single", processing: "5–10 days", processingDaysEstimate: 10, fee: "₹4,500", evisa: false, visaCategory: "embassy", difficulty: "Moderate", popular: false, notes: "Apply at Moroccan consulate. Itinerary and hotel bookings required.", imageSeed: "morocco" },
-  { name: "Egypt", flag: "🇪🇬", code: "eg", region: "africa", type: "Tourist e-Visa", entry: "Single", processing: "3–5 days", processingDaysEstimate: 5, fee: "₹3,500", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa online. Visa on arrival also available at Cairo airport.", imageSeed: "egypt" },
-  { name: "Maldives", flag: "🇲🇻", code: "mv", region: "asia", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "Free", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: true, notes: "Free 30-day visa on arrival for all nationalities. No application needed.", imageSeed: "maldives" },
-  { name: "Mauritius", flag: "🇲🇺", code: "mu", region: "africa", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "Free", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Free visa on arrival for Indian passport holders. Up to 90 days.", imageSeed: "mauritius" },
+  { name: "Saudi Arabia", flag: "🇸🇦", code: "sa", region: "middleeast", type: "Tourist e-Visa", entry: "Multiple", processing: "24–72 hrs", processingDaysEstimate: 3, fee: "₹6,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: true, notes: "Online e-Visa. Valid 1 year, multiple entry, 90 days per visit." },
+  { name: "Qatar", flag: "🇶🇦", code: "qa", region: "middleeast", type: "Tourist Visa", entry: "Single", processing: "2–3 days", processingDaysEstimate: 3, fee: "₹5,200", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "Visa on arrival available. e-Visa recommended for advance planning." },
+  { name: "Oman", flag: "🇴🇲", code: "om", region: "middleeast", type: "Tourist e-Visa", entry: "Single", processing: "24–48 hrs", processingDaysEstimate: 2, fee: "₹4,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa online. 30-day visit visa. Quick processing." },
+  { name: "Jordan", flag: "🇯🇴", code: "jo", region: "middleeast", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "₹4,000", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Visa on arrival available. Jordan Pass recommended for tourists." },
+  { name: "Bahrain", flag: "🇧🇭", code: "bh", region: "middleeast", type: "Tourist e-Visa", entry: "Single", processing: "Instant–24 hrs", processingDaysEstimate: 1, fee: "₹3,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa online. Very quick approval. Up to 14 days stay." },
+  { name: "Kenya", flag: "🇰🇪", code: "ke", region: "africa", type: "e-Visa", entry: "Single", processing: "3–5 days", processingDaysEstimate: 5, fee: "₹4,200", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa mandatory since 2023. Apply at evisa.go.ke." },
+  { name: "Tanzania", flag: "🇹🇿", code: "tz", region: "africa", type: "Tourist Visa", entry: "Single", processing: "2–5 days", processingDaysEstimate: 5, fee: "₹4,800", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa available. Visa on arrival also possible at major ports." },
+  { name: "South Africa", flag: "🇿🇦", code: "za", region: "africa", type: "Tourist Visa", entry: "Single", processing: "10–15 days", processingDaysEstimate: 15, fee: "₹7,000", evisa: false, visaCategory: "embassy", difficulty: "Moderate", popular: false, notes: "Apply at VFS centre. Biometrics required." },
+  { name: "Morocco", flag: "🇲🇦", code: "ma", region: "africa", type: "Tourist Visa", entry: "Single", processing: "5–10 days", processingDaysEstimate: 10, fee: "₹4,500", evisa: false, visaCategory: "embassy", difficulty: "Moderate", popular: false, notes: "Apply at Moroccan consulate. Itinerary and hotel bookings required." },
+  { name: "Egypt", flag: "🇪🇬", code: "eg", region: "africa", type: "Tourist e-Visa", entry: "Single", processing: "3–5 days", processingDaysEstimate: 5, fee: "₹3,500", evisa: true, visaCategory: "evisa", difficulty: "Easy", popular: false, notes: "e-Visa online. Visa on arrival also available at Cairo airport." },
+  { name: "Maldives", flag: "🇲🇻", code: "mv", region: "asia", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "Free", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: true, notes: "Free 30-day visa on arrival for all nationalities. No application needed." },
+  { name: "Mauritius", flag: "🇲🇺", code: "mu", region: "africa", type: "Visa on Arrival", entry: "Single", processing: "On arrival", processingDaysEstimate: 1, fee: "Free", evisa: true, visaCategory: "arrival", difficulty: "Easy", popular: false, notes: "Free visa on arrival for Indian passport holders. Up to 90 days." },
   {
     name: "Georgia",
     flag: "🇬🇪",
@@ -2067,7 +2046,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: false,
     notes: "e-Visa recommended for most Indian travelers. Visa-free entry is possible with a valid US, UK, Schengen, or UAE visa.",
-    imageSeed: "georgia",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -2173,7 +2151,6 @@ export const countries: Country[] = [
     difficulty: "Moderate",
     popular: false,
     notes: "No visa-on-arrival for tourism. Apply through a Visa Application Center with full supporting documentation.",
-    imageSeed: "china",
     lengthOfStay: "90 days",
     packages: [
       {
@@ -2279,7 +2256,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: false,
     notes: "eVisa processed fully online. Confirmed return tickets and hotel booking recommended before applying.",
-    imageSeed: "azerbaijan",
     lengthOfStay: "30 days",
     packages: [
       {
@@ -2377,7 +2353,6 @@ export const countries: Country[] = [
     difficulty: "Easy",
     popular: false,
     notes: "Fast e-Visa processing, often within 24 hours.",
-    imageSeed: "hong-kong",
     lengthOfStay: "30 days",
     packages: [
       {
