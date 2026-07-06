@@ -1,6 +1,20 @@
+import type { Metadata } from "next";
 import { BlogCard } from "@/components/BlogCard";
 import { Reveal } from "@/components/Reveal";
 import { featuredPost, posts } from "@/data/blog-posts";
+
+export const metadata: Metadata = {
+  title: "Visa Insights & Guides — The GVS Blog",
+  description:
+    "Practical visa advice from working consultants: interview preparation, financial documentation, country guides, and rejection recovery for Indian travellers.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Visa Insights & Guides — The GVS Blog",
+    description:
+      "Practical visa advice from working consultants: interview prep, documentation, country guides, and rejection recovery.",
+    url: "/blog",
+  },
+};
 
 export default function BlogPage() {
   return (

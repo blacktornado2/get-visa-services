@@ -1,7 +1,21 @@
+import type { Metadata } from "next";
 import { StatTile } from "@/components/StatTile";
 import { ValueCard } from "@/components/ValueCard";
 import { OfficeCard } from "@/components/OfficeCard";
 import { CtaBanner } from "@/components/CtaBanner";
+
+export const metadata: Metadata = {
+  title: "About Us — A Trusted Extension of Vagabond Holidays",
+  description:
+    "GVS is a Gurgaon-based visa consultancy founded in 2017, delivering reliable, transparent visa solutions for individuals, families, and corporates across India.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About GVS — A Trusted Extension of Vagabond Holidays",
+    description:
+      "Gurgaon-based visa consultancy delivering reliable, transparent visa solutions for individuals, families, and corporates across India.",
+    url: "/about",
+  },
+};
 
 const VALUES = [
   {

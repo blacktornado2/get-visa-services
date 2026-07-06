@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { PricingTier } from "@/components/PricingTier";
+
+export const metadata: Metadata = {
+  title: "Tourist Visa Services & Pricing",
+  description:
+    "End-to-end tourist visa support for 150+ destinations — document review, embassy appointments, application filing, and tracking. Plans from ₹1,499 per application.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Tourist Visa Services & Pricing | GVS",
+    description:
+      "End-to-end tourist visa support for 150+ destinations. Plans from ₹1,499 per application.",
+    url: "/services",
+  },
+};
 
 const INCLUDED = [
   "Single & multi-entry visas",

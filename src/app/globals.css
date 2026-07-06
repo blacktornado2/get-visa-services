@@ -69,6 +69,26 @@ body {
   transform: none;
 }
 
+/* Blog marquee: two identical halves inside the track; sliding from 0 to -50%
+   moves the cards right-to-left and loops seamlessly. Paused on hover so the
+   cards stay clickable. */
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-rtl 90s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 /* Nav links: gold underline slides in from the left on hover. */
 .nav-link {
   position: relative;
@@ -104,6 +124,10 @@ body {
 
   .nav-link::after {
     transition: none;
+  }
+
+  .marquee-track {
+    animation: none;
   }
 }
 

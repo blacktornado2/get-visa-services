@@ -27,9 +27,19 @@ export async function generateMetadata({
   const country = countries.find((c) => c.code === code);
   if (!country) return {};
 
+  const title = `${country.name} Visa for Indians — Fees, Processing Time & Documents`;
+  const description = `Apply for your ${country.name} ${country.type} with GVS: ${country.processing} processing, fees from ${country.fee}, complete document checklist, and expert support.`;
+
   return {
-    title: `${country.name} Tourist Visa — GVS`,
-    description: `Visa type, entry, processing time, fees, and requirements for ${country.name}.`,
+    title,
+    description,
+    alternates: { canonical: `/countries/${country.code}` },
+    openGraph: {
+      title,
+      description,
+      url: `/countries/${country.code}`,
+      images: [{ url: `https://picsum.photos/seed/${country.imageSeed}/1200/630`, width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -38,8 +48,21 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
   const country = countries.find((c) => c.code === code);
   if (!country) notFound();
 
+  const faqJsonLd = country.faqs && {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: country.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+
   return (
     <>
+      {faqJsonLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      )}
       <section className="bg-[linear-gradient(135deg,var(--gradient-hero-start),var(--gradient-hero-end))] px-8 py-[140px] pb-[72px] text-white">
         <div className="mx-auto max-w-[1200px]">
           <p className="text-sm text-white/70">

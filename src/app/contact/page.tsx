@@ -1,6 +1,20 @@
+import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { OfficeCard } from "@/components/OfficeCard";
 import { StatTile } from "@/components/StatTile";
+
+export const metadata: Metadata = {
+  title: "Contact Us — Free Visa Consultation",
+  description:
+    "Talk to a GVS visa expert. Call or WhatsApp +91 98105 45760, email ggn@getvisaservices.in, or visit our Gurgaon office. Average response time: 2 hours.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact GVS — Free Visa Consultation",
+    description:
+      "Call or WhatsApp +91 98105 45760, email ggn@getvisaservices.in, or visit our Gurgaon office.",
+    url: "/contact",
+  },
+};
 
 const OFFICES = [
   {
