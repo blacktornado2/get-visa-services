@@ -12,8 +12,8 @@ type Props = {
 export function PricingTier({ name, price, priceNote, features, featured, cta }: Props) {
   return (
     <div
-      className={`relative rounded-card border p-8 ${
-        featured ? "border-accent bg-surface shadow-lg" : "border-card-border bg-surface"
+      className={`relative rounded-card border p-8 transition-all duration-300 hover:-translate-y-1 ${
+        featured ? "border-accent bg-surface shadow-lg hover:shadow-xl" : "border-card-border bg-surface hover:shadow-lg"
       }`}
     >
       {featured && (
@@ -36,7 +36,7 @@ export function PricingTier({ name, price, priceNote, features, featured, cta }:
       </ul>
       <a
         href={cta.href}
-        className="mt-8 block rounded-btn bg-[linear-gradient(135deg,var(--gradient-cta-start),var(--gradient-cta-end))] py-3 text-center text-sm font-semibold text-white"
+        className="mt-8 block rounded-btn bg-[linear-gradient(135deg,var(--gradient-cta-start),var(--gradient-cta-end))] py-3 text-center text-sm font-semibold text-white transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.98]"
       >
         {cta.label}
       </a>

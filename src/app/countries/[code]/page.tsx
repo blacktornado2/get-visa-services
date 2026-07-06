@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { Check, TriangleAlert } from "lucide-react";
 import { notFound } from "next/navigation";
 import { countries, type Country } from "@/data/countries";
 import { VisaByDate } from "@/components/VisaByDate";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { PricingTier } from "@/components/PricingTier";
+import { Reveal } from "@/components/Reveal";
 
 const difficultyColor: Record<Country["difficulty"], string> = {
   Easy: "text-difficulty-easy",
@@ -113,7 +114,7 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
 
             <a
               href="/contact"
-              className="mt-8 inline-block rounded-btn bg-[linear-gradient(135deg,var(--gradient-cta-start),var(--gradient-cta-end))] px-6 py-3 text-sm font-semibold text-white"
+              className="mt-8 inline-block rounded-btn bg-[linear-gradient(135deg,var(--gradient-cta-start),var(--gradient-cta-end))] px-6 py-3 text-sm font-semibold text-white transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.98]"
             >
               Apply for {country.name} Visa
             </a>
@@ -121,7 +122,7 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
         </div>
 
         {country.packages && (
-          <div className="mt-20">
+          <Reveal className="mt-20">
             <h2 className="font-display text-3xl font-bold text-foreground">Service Packages</h2>
             <p className="mt-2 text-foreground-secondary">Choose the level of support that fits your application.</p>
             <div className="mx-auto mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:max-w-2xl">
@@ -136,36 +137,46 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
                 />
               ))}
             </div>
-          </div>
+          </Reveal>
         )}
 
         {country.documents && (
-          <div className="mt-20">
-            <h2 className="font-display text-3xl font-bold text-foreground">Required Documents</h2>
+          <Reveal className="mt-20">
+            <div className="flex flex-wrap items-center gap-3">
+              <h2 className="font-display text-3xl font-bold text-foreground">Required Documents</h2>
+              <span className="rounded-pill bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+                {country.documents.length} {country.documents.length === 1 ? "document" : "documents"}
+              </span>
+            </div>
             <p className="mt-2 text-foreground-secondary">
               Have these ready before you start your {country.name} visa application.
             </p>
-            <div className="mt-8 grid grid-cols-1 gap-3 rounded-card border border-card-border bg-surface p-6 sm:grid-cols-2 lg:grid-cols-3">
-              {country.documents.map((doc) => (
-                <div
-                  key={doc}
-                  className="flex items-start gap-2 rounded-btn border border-card-border bg-background px-4 py-3 text-sm text-foreground-secondary"
-                >
-                  <Check size={16} className="mt-0.5 shrink-0 text-accent" />
-                  {doc}
-                </div>
-              ))}
+            <div className="mt-8 rounded-card border border-card-border bg-surface p-8">
+              <ul className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
+                {country.documents.map((doc) => (
+                  <li key={doc} className="flex items-center gap-3 text-sm">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10">
+                      <Check size={14} className="text-accent" />
+                    </span>
+                    <span className="text-foreground">{doc}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 flex items-start gap-3 rounded-btn border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-foreground-secondary">
+                <TriangleAlert size={16} className="mt-0.5 shrink-0 text-accent" />
+                Submit correct and complete documents to avoid delays or rejection.
+              </div>
             </div>
-          </div>
+          </Reveal>
         )}
 
         {country.faqs && (
-          <div className="mt-20">
+          <Reveal className="mt-20">
             <h2 className="font-display text-3xl font-bold text-foreground">Frequently Asked Questions</h2>
             <div className="mt-8">
               <FaqAccordion faqs={country.faqs} />
             </div>
-          </div>
+          </Reveal>
         )}
       </section>
     </>

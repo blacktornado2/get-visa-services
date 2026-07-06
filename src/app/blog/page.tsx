@@ -1,4 +1,5 @@
 import { BlogCard } from "@/components/BlogCard";
+import { Reveal } from "@/components/Reveal";
 import { featuredPost, posts } from "@/data/blog-posts";
 
 export default function BlogPage() {
@@ -12,10 +13,14 @@ export default function BlogPage() {
       </section>
 
       <section className="mx-auto max-w-[1200px] px-8 py-[100px]">
-        <BlogCard post={featuredPost} featured />
+        <Reveal>
+          <BlogCard post={featuredPost} featured />
+        </Reveal>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {posts.map((post) => (
-            <BlogCard key={post.title} post={post} />
+          {posts.map((post, i) => (
+            <Reveal key={post.slug} delay={(i % 3) * 120}>
+              <BlogCard post={post} />
+            </Reveal>
           ))}
         </div>
       </section>

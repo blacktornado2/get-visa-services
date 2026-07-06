@@ -1,3 +1,5 @@
+import { Reveal } from "@/components/Reveal";
+
 const STEPS = [
   { title: "Consult", description: "Free consultation with our visa expert to assess eligibility and requirements." },
   { title: "Document", description: "We provide a precise checklist and verify all your documents before submission." },
@@ -9,10 +11,12 @@ export function HowItWorks() {
   return (
     <section className="bg-surface px-8 py-[100px]">
       <div className="mx-auto max-w-[1200px]">
-        <p className="text-center text-xs font-semibold uppercase tracking-[2px] text-accent">How It Works</p>
-        <h2 className="mt-2 text-center font-display text-4xl font-bold text-foreground">
-          Your Visa in 4 Simple Steps
-        </h2>
+        <Reveal>
+          <p className="text-center text-xs font-semibold uppercase tracking-[2px] text-accent">How It Works</p>
+          <h2 className="mt-2 text-center font-display text-4xl font-bold text-foreground">
+            Your Visa in 4 Simple Steps
+          </h2>
+        </Reveal>
         <div className="relative mt-12">
           <div
             className="absolute top-7 left-[12.5%] right-[12.5%] hidden h-0.5 md:block"
@@ -22,7 +26,7 @@ export function HowItWorks() {
           />
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
             {STEPS.map((step, i) => (
-              <div key={step.title} className="text-center">
+              <Reveal key={step.title} delay={i * 120} className="text-center">
                 <div
                   className={`relative mx-auto flex h-14 w-14 items-center justify-center rounded-full font-display text-lg font-bold text-white ${
                     i % 2 === 0 ? "bg-nav-surface" : "bg-accent"
@@ -32,7 +36,7 @@ export function HowItWorks() {
                 </div>
                 <h3 className="mt-4 font-display text-lg font-semibold text-foreground">{step.title}</h3>
                 <p className="mt-2 text-sm text-foreground-secondary">{step.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

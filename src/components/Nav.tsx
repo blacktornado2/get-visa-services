@@ -22,7 +22,7 @@ export function Nav() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="text-sm font-medium text-white">
+            <Link key={link.href} href={link.href} className="nav-link text-sm font-medium text-white">
               {link.label}
             </Link>
           ))}
@@ -32,7 +32,7 @@ export function Nav() {
           <ThemeToggle />
           <Link
             href="/contact"
-            className="rounded-btn bg-[linear-gradient(135deg,var(--gradient-cta-start),var(--gradient-cta-end))] px-5 py-2 text-sm font-semibold text-white"
+            className="rounded-btn bg-[linear-gradient(135deg,var(--gradient-cta-start),var(--gradient-cta-end))] px-5 py-2 text-sm font-semibold text-white transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.98]"
           >
             Get Free Consultation
           </Link>

@@ -23,7 +23,15 @@ export function FaqAccordion({ faqs }: { faqs: Faq[] }) {
                 className={`shrink-0 text-accent transition-transform ${isOpen ? "rotate-180" : ""}`}
               />
             </button>
-            {isOpen && <p className="mt-3 text-sm text-foreground-secondary">{faq.answer}</p>}
+            <div
+              className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <p className="pt-3 text-sm text-foreground-secondary">{faq.answer}</p>
+              </div>
+            </div>
           </div>
         );
       })}

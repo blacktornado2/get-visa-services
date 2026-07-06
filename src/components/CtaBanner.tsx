@@ -13,12 +13,15 @@ export function CtaBanner({ heading, subcopy, primary, secondary }: Props) {
       <h2 className="font-display text-3xl font-bold md:text-4xl">{heading}</h2>
       {subcopy && <p className="mx-auto mt-3 max-w-xl text-white/90">{subcopy}</p>}
       <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <Link href={primary.href} className="rounded-btn bg-nav-surface px-6 py-3 text-sm font-semibold text-white">
+        <Link
+          href={primary.href}
+          className="rounded-btn bg-nav-surface px-6 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
+        >
           {primary.label}
         </Link>
         <Link
           href={secondary.href}
-          className="rounded-btn bg-white px-6 py-3 text-sm font-semibold text-nav-surface"
+          className="rounded-btn bg-white px-6 py-3 text-sm font-semibold text-nav-surface transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
         >
           {secondary.label}
         </Link>
