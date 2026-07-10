@@ -6,6 +6,7 @@ import { FilterBar } from "@/components/FilterBar";
 import { CountryCard } from "@/components/CountryCard";
 import { StatTile } from "@/components/StatTile";
 import { TestimonialCard } from "@/components/TestimonialCard";
+import { AsSeenOn } from "@/components/AsSeenOn";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { CtaBanner } from "@/components/CtaBanner";
 import { BlogMarquee } from "@/components/BlogMarquee";
@@ -103,9 +104,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      <AsSeenOn />
+
       <BlogMarquee />
 
-      <section id="faq" className="bg-surface px-8 py-[100px]">
+      <section id="faq" className="px-8 py-[100px]">
         <Reveal className="mx-auto max-w-[1200px]">
           <h2 className="text-center font-display text-4xl font-bold text-foreground">Frequently Asked Questions</h2>
           <div className="mt-8">

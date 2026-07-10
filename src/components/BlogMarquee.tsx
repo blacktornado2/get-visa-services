@@ -7,7 +7,7 @@ const allPosts = [featuredPost, ...posts];
 
 export function BlogMarquee() {
   return (
-    <section className="overflow-hidden py-[100px]">
+    <section className="overflow-hidden bg-surface py-[100px]">
       <Reveal className="mx-auto max-w-[1200px] px-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -36,8 +36,8 @@ export function BlogMarquee() {
             ))}
           </div>
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-surface to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-surface to-transparent" />
       </div>
     </section>
   );

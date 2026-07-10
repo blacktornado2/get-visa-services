@@ -56,24 +56,13 @@ body {
   color: var(--color-foreground);
 }
 
-/* Travel-themed cursor: a paper plane (maroon, white-outlined so it reads on
-   both themes), turning gold over links and buttons. Text fields keep the
-   browser's I-beam; unsupported browsers fall back to the standard cursor. */
-body {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><path d="M2 2 L26 11 L12 14.5 L10 26 Z" fill="%233D1A24" stroke="white" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 2 L12 14.5" stroke="white" stroke-width="1" opacity="0.65"/></svg>')
-      2 2,
-    auto;
-}
-
 a,
 button,
 select,
 [role="button"],
 .theme-toggle,
 .marquee {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><path d="M2 2 L26 11 L12 14.5 L10 26 Z" fill="%23C08D46" stroke="white" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 2 L12 14.5" stroke="white" stroke-width="1" opacity="0.8"/></svg>')
-      2 2,
-    pointer;
+  cursor: pointer;
 }
 
 /* Scroll-reveal: elements start slightly shifted + transparent, ease in when

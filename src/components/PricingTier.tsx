@@ -12,7 +12,7 @@ type Props = {
 export function PricingTier({ name, price, priceNote, features, featured, cta }: Props) {
   return (
     <div
-      className={`relative rounded-card border p-8 transition-all duration-300 hover:-translate-y-1 ${
+      className={`relative flex h-full flex-col rounded-card border p-8 transition-all duration-300 hover:-translate-y-1 ${
         featured ? "border-accent bg-surface shadow-lg hover:shadow-xl" : "border-card-border bg-surface hover:shadow-lg"
       }`}
     >
@@ -26,7 +26,7 @@ export function PricingTier({ name, price, priceNote, features, featured, cta }:
         {price}
         {priceNote && <span className="ml-1 text-sm font-normal text-foreground-secondary">{priceNote}</span>}
       </p>
-      <ul className="mt-6 space-y-3">
+      <ul className="mt-6 flex-1 space-y-3">
         {features.map((f) => (
           <li key={f} className="flex items-start gap-2 text-sm text-foreground-secondary">
             <Check size={16} className="mt-0.5 shrink-0 text-accent" />

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
-import { Check, TriangleAlert } from "lucide-react";
+import { Check, TriangleAlert, FileText, LogIn, Clock, IndianRupee, CalendarCheck, Gauge, CalendarRange, type LucideIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 import { countries, type Country } from "@/data/countries";
 import { VisaByDate } from "@/components/VisaByDate";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { PricingTier } from "@/components/PricingTier";
+import { GuaranteeCard } from "@/components/GuaranteeCard";
+import { TrustBadge } from "@/components/TrustBadge";
 import { Reveal } from "@/components/Reveal";
 
 const difficultyColor: Record<Country["difficulty"], string> = {
@@ -13,6 +16,34 @@ const difficultyColor: Record<Country["difficulty"], string> = {
   Moderate: "text-difficulty-moderate",
   Hard: "text-difficulty-hard",
 };
+
+function InfoField({
+  icon: Icon,
+  label,
+  value,
+  valueClassName,
+}: {
+  icon: LucideIcon;
+  label: string;
+  value: ReactNode;
+  valueClassName?: string;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10">
+        <Icon size={20} className="text-accent" />
+      </span>
+      <div>
+        <dt className="text-foreground-secondary">{label}</dt>
+        <dd
+          className={`mt-0.5 font-semibold underline decoration-1 underline-offset-2 ${valueClassName ?? "text-foreground"}`}
+        >
+          {value}
+        </dd>
+      </div>
+    </div>
+  );
+}
 
 export function generateStaticParams() {
   return countries.map((c) => ({ code: c.code }));
@@ -63,7 +94,7 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
       {faqJsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}
-      <section className="bg-[linear-gradient(135deg,var(--gradient-hero-start),var(--gradient-hero-end))] px-8 py-[140px] pb-[72px] text-white">
+      <section className="bg-[linear-gradient(135deg,var(--gradient-hero-start),var(--gradient-hero-end))] px-8 py-[80px] pb-[72px] text-white">
         <div className="mx-auto max-w-[1200px]">
           <p className="text-sm text-white/70">
             <Link href="/">Home</Link> / <Link href="/countries">Countries</Link> / {country.name}
@@ -71,7 +102,9 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
           <h1 className="mt-4 font-display text-5xl font-bold">
             {country.flag} {country.name}
           </h1>
-          <p className="mt-2 text-white/80">{country.type}</p>
+          <span className="mt-4 inline-block rounded-pill bg-white/15 px-4 py-1 text-sm font-semibold text-white">
+            {country.type}
+          </span>
         </div>
       </section>
 
@@ -98,42 +131,30 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
           </div>
 
           <div className="md:col-span-3">
-            <dl className="grid grid-cols-2 gap-6 text-sm sm:grid-cols-3">
-              <div>
-                <dt className="text-foreground-secondary">Visa Type</dt>
-                <dd className="mt-1 font-medium text-foreground">{country.type}</dd>
-              </div>
-              <div>
-                <dt className="text-foreground-secondary">Entry</dt>
-                <dd className="mt-1 font-medium text-foreground">{country.entry}</dd>
-              </div>
-              <div>
-                <dt className="text-foreground-secondary">Processing Time</dt>
-                <dd className="mt-1 font-medium text-foreground">{country.processing}</dd>
-              </div>
-              <div>
-                <dt className="text-foreground-secondary">Fee</dt>
-                <dd className="mt-1 font-medium text-foreground">{country.fee}</dd>
-              </div>
-              <div>
-                <dt className="text-foreground-secondary">Get Visa By</dt>
-                <dd className="mt-1 font-medium text-foreground">
-                  <VisaByDate processingDaysEstimate={country.processingDaysEstimate} />
-                </dd>
-              </div>
-              <div>
-                <dt className="text-foreground-secondary">Difficulty</dt>
-                <dd className={`mt-1 font-medium ${difficultyColor[country.difficulty]}`}>{country.difficulty}</dd>
-              </div>
+            <TrustBadge className="mb-6" />
+
+            <dl className="grid grid-cols-1 gap-x-6 gap-y-6 text-sm sm:grid-cols-2">
+              <InfoField icon={FileText} label="Visa Type" value={country.type} />
+              <InfoField icon={LogIn} label="Entry" value={country.entry} />
+              <InfoField icon={Clock} label="Processing Time" value={country.processing} />
+              <InfoField icon={IndianRupee} label="Fee" value={country.fee} />
+              <InfoField
+                icon={CalendarCheck}
+                label="Get Visa By"
+                value={<VisaByDate processingDaysEstimate={country.processingDaysEstimate} />}
+              />
+              <InfoField
+                icon={Gauge}
+                label="Difficulty"
+                value={country.difficulty}
+                valueClassName={difficultyColor[country.difficulty]}
+              />
               {country.lengthOfStay && (
-                <div>
-                  <dt className="text-foreground-secondary">Length of Stay</dt>
-                  <dd className="mt-1 font-medium text-foreground">{country.lengthOfStay}</dd>
-                </div>
+                <InfoField icon={CalendarRange} label="Length of Stay" value={country.lengthOfStay} />
               )}
             </dl>
 
-            <p className="mt-8 text-foreground-secondary">{country.notes}</p>
+            <GuaranteeCard />
 
             <a
               href="/contact"

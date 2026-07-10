@@ -17,7 +17,6 @@ export function Nav() {
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white">
             <img src="/gvs-icon.png" alt="" className="h-7 w-7 object-contain" />
           </span>
-          <span className="font-display text-base font-bold tracking-widest text-white">Get Visa Services</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
