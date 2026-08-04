@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { Check, TriangleAlert, FileText, LogIn, Clock, IndianRupee, CalendarCheck, Gauge, CalendarRange, type LucideIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 import { countries, type Country } from "@/data/countries";
 import { VisaByDate } from "@/components/VisaByDate";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { PricingTier } from "@/components/PricingTier";
+import { PackageSwitcher } from "@/components/PackageSwitcher";
 import { GuaranteeCard } from "@/components/GuaranteeCard";
 import { TrustBadge } from "@/components/TrustBadge";
 import { Reveal } from "@/components/Reveal";
@@ -94,15 +93,29 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
       {faqJsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}
-      <section className="bg-[linear-gradient(135deg,var(--gradient-hero-start),var(--gradient-hero-end))] px-8 py-[80px] pb-[72px] text-white">
+      <section className="relative isolate overflow-hidden px-8 py-[110px] pb-[96px] text-white">
+        {/* Wide scenery shot behind the hero — a different subject than the portrait
+            landmark in /landmarks used by the card and the detail panel below.
+            Neutral black overlays only: a flat wash to knock the photo back, plus a
+            scrim weighted to the text side. */}
+        <img
+          src={`/scenery/${country.code}.jpg`}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
+        />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/25" />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(0,0,0,0.55),rgba(0,0,0,0.25)_45%,rgba(0,0,0,0.05))]"
+        />
+
         <div className="mx-auto max-w-[1200px]">
-          <p className="text-sm text-white/70">
-            <Link href="/">Home</Link> / <Link href="/countries">Countries</Link> / {country.name}
-          </p>
-          <h1 className="mt-4 font-display text-5xl font-bold">
+          <h1 className="font-display text-5xl font-bold [text-shadow:0_2px_6px_rgba(0,0,0,0.55),0_10px_36px_rgba(0,0,0,0.6)]">
             {country.flag} {country.name}
           </h1>
-          <span className="mt-4 inline-block rounded-pill bg-white/15 px-4 py-1 text-sm font-semibold text-white">
+          <span className="mt-4 inline-block rounded-pill border border-white/25 bg-black/25 px-4 py-1 text-sm font-semibold text-white backdrop-blur-sm">
             {country.type}
           </span>
         </div>
@@ -169,17 +182,8 @@ export default async function CountryPage({ params }: { params: Promise<{ code: 
           <Reveal className="mt-20">
             <h2 className="font-display text-3xl font-bold text-foreground">Service Packages</h2>
             <p className="mt-2 text-foreground-secondary">Choose the level of support that fits your application.</p>
-            <div className="mx-auto mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:max-w-2xl">
-              {country.packages.map((pkg) => (
-                <PricingTier
-                  key={pkg.name}
-                  name={pkg.name}
-                  price={pkg.price}
-                  featured={pkg.name.toLowerCase().includes("premium")}
-                  features={pkg.features}
-                  cta={{ label: "Get Started", href: "/contact" }}
-                />
-              ))}
+            <div className="mt-8">
+              <PackageSwitcher packages={country.packages} />
             </div>
           </Reveal>
         )}
