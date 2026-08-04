@@ -13,10 +13,12 @@ export function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 h-[68px] border-b border-white/10 bg-nav-surface/92 backdrop-blur-md">
       <div className="mx-auto flex h-full max-w-[1200px] items-center justify-between px-8">
-        <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white">
-            <img src="/gvs-icon.png" alt="" className="h-7 w-7 object-contain" />
-          </span>
+        <Link href="/" className="flex shrink-0 items-center">
+          {/* White-on-transparent lockup, so it sits directly on the maroon bar —
+              no white disc behind it, which would hide it. */}
+          {/* shrink-0 keeps flex from squeezing the box narrower than the lockup's
+              aspect, which would letterbox it via object-contain. */}
+          <img src="/gvs-logo.png" alt="Get Visa Services" className="h-12 w-auto shrink-0 object-contain sm:h-13" />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

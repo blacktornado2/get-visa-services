@@ -33,17 +33,7 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="bg-surface px-8 py-3">
-        <div className="mx-auto max-w-[1200px]">
-          <img
-            src="/gvs-visas-on-time-banner.png"
-            alt="GVS Get Visa Services — Visas On Time Guaranteed"
-            className="mx-auto w-full max-w-sm"
-          />
-        </div>
-      </section>
-
-      <section id="countries" className="mx-auto max-w-[1200px] px-8 py-[50px]">
+      <section id="countries" className="mx-auto max-w-[1200px] px-8 pb-[50px] pt-[70px]">
         <h2 className="text-center font-display text-5xl font-bold text-foreground">Popular Countries</h2>
         <p className="mx-auto mt-4 max-w-xl text-center text-foreground-secondary">
           Trusted visa support for the destinations Indian travelers book most.

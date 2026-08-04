@@ -12,10 +12,8 @@ export function Footer() {
     <footer className="bg-nav-surface px-8 py-10 text-white">
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 md:grid-cols-2">
         <div>
-          <div className="flex items-center gap-3">
-            <img src="/gvs-icon.png" alt="" className="h-9 w-9 object-contain" />
-            <span className="font-display text-base font-bold">Get Visa Services</span>
-          </div>
+          {/* The lockup already carries the wordmark, so no adjacent text label. */}
+          <img src="/gvs-logo.png" alt="Get Visa Services" className="h-16 w-auto object-contain" />
           <p className="mt-4 text-sm text-white/70">
             A trusted extension of Vagabond Holidays, serving travellers and corporates since 2017.
           </p>
